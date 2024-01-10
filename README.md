@@ -2,6 +2,8 @@
 ### This is project for `informatyka-1e` at very start of 2024
 
 # [en_US]
+## why the hell is it public
+github needed that for contributors to work
 ## How to use
 
 1. Download or clone repo, using: ```git clone https://github.com/FokoHetman/Informatyka-1e-2024.git```. To install git just do: ```apt install git``` with su permissions (!! Only on Debian-based linuxes !!).
