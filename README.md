@@ -1,3 +1,25 @@
+# TODO!
+## Graphics:
+* icon
+* default user profile
+## Backend:
+* helpers (require login - wraps, apology)
+* browse
+* basket
+* pfp managment (you somehow fucked that up
+## Others:
+* styling
+* more styling
+* even more styling
+* :D
+* implement games & apps
+
+
+
+
+
+
+
 # Hello There!
 ### This is project for `informatyka-1e` at very start of 2024
 
