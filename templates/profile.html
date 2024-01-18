@@ -1,0 +1,21 @@
+{% extends "layout.html" %}
+{% block title %}
+  Graphical DB Control
+{% endblock %}
+{% block embed %} 
+<div class="center">
+<form action="/profile" method="post">
+  <a class="center btn" href="/logout"> Log out </a>
+
+  <input type=text class="query center" name="nusername" placeholder="New Username"></input>
+  <input type=password class="query center" name="npassword" placeholder="New Password"></input>
+  <input type=password class="query center" name="npassword-conf" placeholder="Confirm New Password"></input>
+  <input type=file class="query center" name=file placeholder="pfp"></input>
+
+  <input type=password class="query center" name="opassword" placeholder="Old Password"></input>
+  <button type=submit class="center submit btn"> Submit </button>
+
+  
+</form>
+</div>
+{% endblock %}

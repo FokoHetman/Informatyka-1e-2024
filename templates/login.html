@@ -1,0 +1,18 @@
+{% extends "layout.html" %}
+
+{% block title %}
+  Log in
+{% endblock %}
+
+{% block embed %}
+
+  <form method="post" action="/login">
+
+    <input type=text name="username" placeholder="Username" class="username query center"></input>
+    <input type=password name="password" placeholder="Password" class="password query center"></input>
+
+    <button name="submit" class="submit btn ">Submit</button>
+
+  </form>
+
+{% endblock %}

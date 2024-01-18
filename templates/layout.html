@@ -1,0 +1,147 @@
+<style>
+@font-face {
+  font-family: DaysOne;
+  src: url("{{url_for('static', filename='fonts/DaysOne-Regular.ttf')}}") format('truetype');
+}
+
+a {
+  color: rgba(200, 200, 200, 0.8);
+  background-color: rgba(50, 50, 50, 0.2);
+}
+a:link {
+  color: rgba(200, 200, 200, 0.8);
+}
+
+body, html {
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  font-family: DaysOne;
+  height: 100%;
+  
+}
+.center {
+  width: 50%;
+  position: relative;
+  margin: auto;
+  text-align: center;
+}
+
+.panel {
+  right: 0.7%;
+  width: 100%;
+  height: 6%;
+  position: relative;
+  display: flex;
+  bottom: 7px;
+  background-color: rgba(0, 0, 0, 0.7);
+  padding: 10px;
+}
+.element {
+  width: 20%;
+  height: 100%;
+  position: relative;
+  margin-right: 1%;
+  text-align: center;
+  transition: 1s;
+  font-size: 16px;
+}
+
+.element:hover {
+  transform: scale(1.2);
+  opacity: 1;
+}
+.embed {
+  position: absolute;
+  font-size: 12px;
+  font: DaysOne;
+  left: 25%;
+  bottom: 50%;
+
+}
+.query {
+  border: 1px solid black;
+  border-radius: 5px;
+  font: DaysOne;
+  margin-bottom: 1.5%;
+  display: block;
+}
+.btn {
+  border: 1px solid black;
+  border-radius: 5px;
+  width: 45%;
+}
+
+.logo {
+  background-image: url("{{url_for('static', filename='images/logo.png')}}");
+}
+</style>
+
+<html>
+<head>
+  <title> {% block title %} {% endblock %}</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+<div class="all">
+
+
+  {% if session["user_id"] %}
+    <div id="panel" class="panel center">
+    </div>
+  {% else %}
+    <div id="panel2" class="panel center">
+    </div>
+  {% endif %}
+
+
+  <div id="embed" class="embed center">
+  {% block embed %} {% endblock %}
+  </div>
+</div>
+
+
+<script>
+
+function addPanelElement(hrf, name, id, add) {
+  var panel = document.getElementById(id);
+  var a = document.createElement("a");
+  a.innerText=name;
+  a.href=hrf;
+
+
+  var div = document.createElement("div");
+  div.id=name;
+  div.className="element";
+  if (add) {
+    div.className="element " + add;
+  }
+
+  panel.appendChild(div);
+  document.getElementById(name).appendChild(a);
+}
+
+{% if not session["user_id"] %}
+  addPanelElement("", "{{website_name}}", "panel2", "logo");
+  addPanelElement("about", "About", "panel2", "about");
+  addPanelElement("browse", "Browse", "panel2", "browse");
+  addPanelElement("basket", "Basket", "panel2", "basket");
+  addPanelElement("library", "Library", "panel2", "library");
+
+
+  addPanelElement("login", "Login", "panel2", "loginpart");
+  addPanelElement("register", "Register", "panel2", "loginpart");
+{% else %}
+  addPanelElement("", "{{website_name}}", "panel", "logo");
+  addPanelElement("about", "About", "panel", "about");
+  addPanelElement("browse", "Browse", "panel", "browse");
+  addPanelElement("basket", "Basket", "panel", "basket");
+  addPanelElement("library", "Library", "panel", "library");
+
+
+  addPanelElement("profile", "profile", "panel");
+{% endif %}
+</script>
+</body>
+</html>
+
