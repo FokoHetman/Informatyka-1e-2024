@@ -1,0 +1,21 @@
+{% extends "layout.html" %}
+{% block title %}
+  Register
+{% endblock %}
+
+{% block main %}
+<div class="container center">
+<form action="/register" method="post">
+
+  <input type=text class="query center" name="username" placeholder="Username..."></input>
+
+  <input type=password class="query center" name="passwd" placeholder="Password..."></input>
+  <input type=password class="query center" name="passwd-confirm" placeholder="Confirm password..."></input>
+
+  <button type=submit class="center submit"> Submit </button>
+
+
+</form>
+
+
+{% endblock %}

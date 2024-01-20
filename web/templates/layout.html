@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+
+<style>
+@font-face {
+  font-family: DaysOne;
+  src: url("{{url_for('static', filename='fonts/DaysOne-Regular.ttf')}}")  format('truetype');
+}
+
+
+
+body {
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  margin: 0;
+  height: 100%;
+  font-family: DaysOne;
+  background-image: url("{{url_for('static', filename='images/blackhole-far.png')}}");
+}
+html {
+  margin: 0;
+  height: 100%;
+}
+
+
+
+.container {
+  top: 50%;
+  -ms-transform: translateY(-25%);
+  transform: translateY(-25%);
+  margin: 0;
+  padding: 15px;
+  position: absolute;
+  left: 25%;
+  font-family: DaysOne;
+  color: white;
+}
+
+
+
+.query {
+  color: white;
+  font-family: DaysOne;
+  background: rgba(75, 75, 75, 0.55);
+  border-radius: 12px;
+  position: relative;
+}
+
+.submit {                               //max compatibility gradient (seriously...)
+  font-family: DaysOne;
+  background: rgb(0,147,0);
+  background: -moz-radial-gradient(circle, rgba(0,0,100,0.6) 0%, rgba(0,0,200,0.5) 100%);
+  background: -webkit-radial-gradient(circle, rgba(0,0,100,0.6) 0%, rgba(0,0,200,0.5) 100%);
+  background: radial-gradient(circle, rgba(0,0,100,0.6) 0%, rgba(0,0,200,0.5) 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#009300",endColorstr="#00e600",GradientType=1);
+  border-radius: 12px;
+  color: white;
+  position: absolute;
+  left: 25%;
+}
+
+
+
+
+.element {
+  top: 15px;
+  position: relative;
+  text-align: center;
+  width: 20%;
+  height: 54px;
+  color: rgba(255, 136, 136, 0.5);
+
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+}
+a {
+  width: 100%;
+  height: 100%;
+}
+a:hover {
+  color: rgb(194, 62, 62);
+  background-color: rgba(100, 100, 100, 0.5);
+}
+a:visited {
+  color: rgb(194, 62, 62);
+  background-color: rgba(100, 100, 100, 0.5);
+}
+a:link {
+  color: rgb(194, 62, 62);
+  background-color: rgba(100, 100, 100, 0.5);
+}
+.panel {
+  border: 3px solid black;
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  background: rgba(70, 70, 70, 0.4);
+}
+
+
+
+.height15 {
+  height: 35%;
+}
+.center {
+  position: flex;
+  margin: auto;
+  padding: 15px; 
+
+  text-align: center;
+  width: 50%;
+  display: block;
+  margin-bottom: 2.5%;
+}
+
+
+
+
+</style>
+
+
+
+
+<html lang="pl">
+<head>
+  <title> {% block title %} {% endblock %}</title>
+</head>
+<body>
+  <div class="all">
+    <div id="panel" class="height15 panel">
+      
+      {% if session["user_id"] %}
+        <div class="element">
+          <a href="{{url_for('logout')}}">Log out</a>
+
+        </div>        
+
+      {% else %}
+        <div class="element element1">
+          <a href="{{url_for('login')}}">Log In</a>
+          <a href="{{url_for('register')}}">Register</a> 
+        </div>
+        
+      {% endif %}
+    </div>
+
+    <div id="embed">
+      {% block main %}
+      {% endblock %}
+    </div>
+  </div>
+</body>
+</html>
+
+
+
+<script>
+
+
+function addToPanel(id, elem, nam, hrf, bg) {
+  const newdiv = document.createElement("div");
+  const newp = document.createElement(elem);
+
+  newdiv.className = "element element" + id;
+  newp.innerText=nam;
+  newp.href=hrf;
+  newdiv.appendChild(newp)
+  document.getElementById("panel").appendChild(newdiv);
+  elements=document.getElementsByClassName("element" + id);
+  elements[0].style.backgroundImage="url('" + bg + "')";
+}
+//addToPanel(0, "a", "KRABY W GRACH", "https://open.spotify.com/search/KRABY%20W%20GRACH", "images/crab.jpg");
+//addToPanel(1, "a", "DISCORD", "https://discord.gg/kkUhmGnBF8");
+//addToPanel(2, "a", "GitHub", "https://github.com/FokoHetman");
+//addToPanel(3, "a", "nop", "nop");
+//addToPanel(4, "a", "LOGIN", "not yet");    // DO NOT DO THAT THIS WAY YOU DUMBASS
+
+</script>

@@ -1,0 +1,15 @@
+{% extends "layout.html" %}
+{% block title %}
+  Graphical DB Control
+{% endblock %}
+{% block main %} 
+<div class="center container">
+<form action="/gdb" method="post">
+
+  <input type=text class="query center" name="query" placeholder="Query"></input>
+  <button type=submit class="center submit"> Submit </button>
+
+
+</form>
+</div>
+{% endblock %}

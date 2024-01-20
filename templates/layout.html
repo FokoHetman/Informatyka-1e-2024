@@ -1,4 +1,12 @@
 <style>
+@media (min-width:320px)  { 
+  /* smartphones, portrait iPhone, portrait 480x320 phones (Android) */
+  .lib_panel {
+    width: 8%;
+    display: block;
+  }  
+}
+
 @font-face {
   font-family: DaysOne;
   src: url("{{url_for('static', filename='fonts/DaysOne-Regular.ttf')}}") format('truetype');
@@ -74,12 +82,40 @@ body, html {
 .logo {
   background-image: url("{{url_for('static', filename='images/logo.png')}}");
 }
+
+
+.lib_panel {
+  display: block;
+  position: relative;
+
+  width: 2%;
+  right: 0.3%;
+  background-color: rgba(100, 100, 100, 0.7);
+  font-size: 0.1px;
+  height: 50%;
+  transition: 1s;
+  top: 10%;
+  border: 1px solid black;
+  border-radius: 0% 15% 15% 0%;
+}
+.lib_panel:hover {
+  width: 20%;
+  font-size: 12px;
+  display: block;
+  .lib-panelbtn {
+    display: block;
+  }
+}
+.lib-panelbtn {
+  display: none;
+}
+
 </style>
 
 <html>
 <head>
   <title> {% block title %} {% endblock %}</title>
-
+  
   <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body>
@@ -94,6 +130,19 @@ body, html {
     </div>
   {% endif %}
 
+  <div id="lib_panel" class="lib_panel">
+    <h1> Library: </h1>
+    {% if session["user_id"] %}
+
+      {% for i in games %}
+        <div id="game-libpanel" class="game-libpanel">
+          <img src=i[-1]></img>
+          <h2> title </h2>
+      {% endfor %}
+    {% else %}
+      <button id="login" class="lib-panelbtn query login center">Log in</button>
+    {% endif %}
+  </div>
 
   <div id="embed" class="embed center">
   {% block embed %} {% endblock %}
@@ -122,7 +171,7 @@ function addPanelElement(hrf, name, id, add) {
 }
 
 {% if not session["user_id"] %}
-  addPanelElement("", "{{website_name}}", "panel2", "logo");
+  addPanelElement("/", "{{website_name}}", "panel2", "logo");
   addPanelElement("about", "About", "panel2", "about");
   addPanelElement("browse", "Browse", "panel2", "browse");
   addPanelElement("basket", "Basket", "panel2", "basket");
@@ -132,7 +181,7 @@ function addPanelElement(hrf, name, id, add) {
   addPanelElement("login", "Login", "panel2", "loginpart");
   addPanelElement("register", "Register", "panel2", "loginpart");
 {% else %}
-  addPanelElement("", "{{website_name}}", "panel", "logo");
+  addPanelElement("/", "{{website_name}}", "panel", "logo");
   addPanelElement("about", "About", "panel", "about");
   addPanelElement("browse", "Browse", "panel", "browse");
   addPanelElement("basket", "Basket", "panel", "basket");
