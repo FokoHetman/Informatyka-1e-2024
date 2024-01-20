@@ -4,7 +4,7 @@
 {% endblock %}
 {% block embed %} 
 <div class="center">
-<form action="/profile" method="post">
+<form action="/profile" method="post" enctype=multipart/form-data>
   <a class="center btn" href="/logout"> Log out </a>
 
   <input type=text class="query center" name="nusername" placeholder="New Username"></input>

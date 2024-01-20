@@ -14,7 +14,6 @@
 
 a {
   color: rgba(200, 200, 200, 0.8);
-  background-color: rgba(50, 50, 50, 0.2);
 }
 a:link {
   color: rgba(200, 200, 200, 0.8);
@@ -43,8 +42,11 @@ body, html {
   bottom: 7px;
   background-color: rgba(0, 0, 0, 0.7);
   padding: 10px;
+  vertical-align: middle;
 }
+
 .element {
+  bottom: 25%;  
   width: 20%;
   height: 100%;
   position: relative;
@@ -79,15 +81,31 @@ body, html {
   width: 45%;
 }
 
+
+
+
 .logo {
-  background-image: url("{{url_for('static', filename='images/logo.png')}}");
+//  background-image: url("{{url_for('static', filename='images/logo.png')}}");
+//  background-repeat: no-repeat;
+//  background-size: 100% 100%; 
+//  object-fit: cover;
+//  height: 140%;
+//  width: 3.5%;
 }
+img {
+  position: relative;
+  max-width: 16%;
+  bottom: 25%;
+}
+
+
+
 
 
 .lib_panel {
   display: block;
   position: relative;
-
+  color: white;
   width: 2%;
   right: 0.3%;
   background-color: rgba(100, 100, 100, 0.7);
@@ -109,6 +127,22 @@ body, html {
 .lib-panelbtn {
   display: none;
 }
+.textblock {
+  background-color: rgba(25, 25, 25, 0.4);
+  color: white;
+  border: 2px solid black;
+  border-radius: 5px;
+  padding: 25px;
+  width: 75%;
+  font-size: 120%;
+  text-align: left;
+}
+
+.paneltxt {
+  position: relative;
+  top: 50%;
+}
+
 
 </style>
 
@@ -129,19 +163,15 @@ body, html {
     <div id="panel2" class="panel center">
     </div>
   {% endif %}
-
+  {% if session["user_id"] and library %}
   <div id="lib_panel" class="lib_panel">
     <h1> Library: </h1>
-    {% if session["user_id"] %}
-
       {% for i in games %}
         <div id="game-libpanel" class="game-libpanel">
           <img src=i[-1]></img>
           <h2> title </h2>
       {% endfor %}
-    {% else %}
-      <button id="login" class="lib-panelbtn query login center">Log in</button>
-    {% endif %}
+  {% endif %}
   </div>
 
   <div id="embed" class="embed center">
@@ -152,12 +182,15 @@ body, html {
 
 <script>
 
-function addPanelElement(hrf, name, id, add) {
+function addPanelElement(hrf, name, id, add, notext) {
   var panel = document.getElementById(id);
   var a = document.createElement("a");
-  a.innerText=name;
+  if (!notext) {
+    a.innerText=name;
+  }
   a.href=hrf;
-
+  a.className="paneltxt";
+  a.id = "a"+name;
 
   var div = document.createElement("div");
   div.id=name;
@@ -171,7 +204,7 @@ function addPanelElement(hrf, name, id, add) {
 }
 
 {% if not session["user_id"] %}
-  addPanelElement("/", "{{website_name}}", "panel2", "logo");
+  addPanelElement("/", "{{website_name}}", "panel2", "logo", true);
   addPanelElement("about", "About", "panel2", "about");
   addPanelElement("browse", "Browse", "panel2", "browse");
   addPanelElement("basket", "Basket", "panel2", "basket");
@@ -181,15 +214,31 @@ function addPanelElement(hrf, name, id, add) {
   addPanelElement("login", "Login", "panel2", "loginpart");
   addPanelElement("register", "Register", "panel2", "loginpart");
 {% else %}
-  addPanelElement("/", "{{website_name}}", "panel", "logo");
+  addPanelElement("/", "{{website_name}}", "panel", "logo", true);
   addPanelElement("about", "About", "panel", "about");
   addPanelElement("browse", "Browse", "panel", "browse");
   addPanelElement("basket", "Basket", "panel", "basket");
   addPanelElement("library", "Library", "panel", "library");
 
 
-  addPanelElement("profile", "profile", "panel");
+  addPanelElement("profile", "profile", "panel", "profile", true);
 {% endif %}
+
+function swapImg(obj, src) {
+  img = document.createElement("img");
+  img.src=src;
+  obj.appendChild(img);
+}
+
+swapImg(document.getElementById("a{{website_name}}"), "{{url_for('static', filename='images/logo.png')}}");
+{% if session["user_id"] %}
+swapImg(document.getElementById("aprofile"), "{{url_for('static', filename='images/profiles/' + str(session['user_id']) + '.png')}}");
+{% else %}
+swapImg(document.getElementById("aprofile"), 
+  "{{url_for('static', filename=dbs.execute('SELECT val FROM dynamic WHERE var=\'defprof\''))}}");
+
+{% endif %}
+
 </script>
 </body>
 </html>

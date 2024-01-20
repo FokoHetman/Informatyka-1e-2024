@@ -17,17 +17,24 @@ app = Flask(__name__)
 
 app.config["SESSION_PERMANENT"] = False
 app.config["SESSION_TYPE"] = 'filesystem'
-app.config["PFPS"] = "static/images"
+app.config["UPLOAD_FOLDER"] = "static/images/profiles"
 Session(app)
 
 
 
 
 '''ROUTES'''
+
+@app.route("/about", methods=["GET"])
+def about():
+  name = dbs.execute("SELECT val FROM dynamic WHERE var='site_name'")[0][0]
+  return render_template("about.html", website_name=name, dbs=dbs, str=str, library=True)
+
+
 @app.route("/") # INDEX OF THE PROJECT. SHOW OWNED GAMES & STUFF
 def main():
   name = dbs.execute("SELECT val FROM dynamic WHERE var='site_name'")[0][0]
-  return render_template("index.html", website_name=name)
+  return render_template("index.html", website_name=name, str=str, library=True, dbs=dbs)
 
 
 @app.route("/browse", methods=["GET", "POST"]) # BROWSE METHOD. LOOK FOR NOT OWNED GAMES.
@@ -43,7 +50,7 @@ def browse():
     return games
 
   else:
-    return render_template("browse.html", website_name=name)
+    return render_template("browse.html", website_name=name, str=str, library=True, dbs=dbs)
 
 
 @app.route("/login", methods=["GET", "POST"])
@@ -70,7 +77,7 @@ def login():
     return redirect("/")
 
   else:
-    return render_template("login.html", website_name=name)
+    return render_template("login.html", website_name=name, str=str, dbs=dbs)
 
 @app.route("/register", methods=["GET", "POST"])
 def register():
@@ -101,7 +108,7 @@ def register():
 
     return redirect("/")
   else:
-    return render_template("register.html", website_name=name)
+    return render_template("register.html", website_name=name, str=str,dbs=dbs)
 
 @app.route("/logout")
 def logout():
@@ -113,7 +120,7 @@ def logout():
 
 def allowed_file(filename):
     return '.' in filename and \
-           filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
+           filename.rsplit('.', 1)[1].lower() == "png"
 
 
 
@@ -145,16 +152,18 @@ def profile():
 
 
     if 'file' in request.files:
-      file = requests.files['file']
+      file = request.files['file']
 
       if not file.filename=='':
+        print(file, allowed_file(file.filename))
         if file and allowed_file(file.filename):
-          fname=str(session["user_id"]) + file.filename.rsplit(".", 1)[1].lower()
-          file.save(os.path.join(app.config["PFPS"], fname))
+          fname=str(session["user_id"]) + "." + file.filename.rsplit(".", 1)[1].lower()
+          file.save(os.path.join(app.config["UPLOAD_FOLDER"], fname))
+          dbs.execute(f"UPDATE users SET profile='{os.path.join(app.config['UPLOAD_FOLDER'], fname)}' WHERE id={session['user_id']}")
 
     return redirect("/")
   else:
-    return render_template("profile.html", website_name=name)
+    return render_template("profile.html", website_name=name, str=str,dbs=dbs)
 
 
 
@@ -172,7 +181,7 @@ def gdb():
     q=request.form.get("query")
     return dbs.execute(q)
   else:
-    return render_template("query.html", website_name=name)
+    return render_template("query.html", website_name=name, str=str,dbs=dbs)
 
 
 app.run(port=2137, host='0.0.0.0')

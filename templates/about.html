@@ -1,0 +1,24 @@
+{% extends "layout.html" %}
+
+{% block title %} {{website_name}} {% endblock %}
+
+{% block embed %}
+
+<div class="center textblock">
+
+<h1> Hello, {{dbs.execute("SELECT name FROM users WHERE id=" + str(session['user_id']))[0][0]}}! </h1>
+
+<h3>Welcome to {{website_name}}.</h3><br>
+This is a project, that is supposed to look and work like game stores, such as steam or epic games.
+Let's start with the authors: Bartek, Patryk, Jakub and Robert.
+Project was an idea proposed by foko found by mixing ideas of others, expanded and "upgraded" by other group members.
+More about the jobs:
+<ul>
+<li>Bartek: creator of icons and such - frontend,</li>
+<li>Jakub: main frontend dev - css and some parts of backend,</li>
+<li>Robert: "ideamaker" - upgraded the main concept by a lot, helped with solving a lot of stated questions.</li>
+<li>Patryk: Maintainer of "skeleton" of that site. Main backend dev.</li>
+</ul>
+</div>
+
+{% endblock %}
