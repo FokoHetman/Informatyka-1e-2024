@@ -1,14 +1,14 @@
 # TODO!
 ## Graphics:
-* icon
-* default user profile
+* icon  - done
+* default user profile - done
 ## Backend:
 * helpers (require login - wraps, apology)
 * browse
-* basket
-* pfp managment (you somehow fucked that up
+* cart
+* pfp managment (you somehow fucked that up - done
 ## Others:
-* styling
+* styling - done
 * more styling
 * even more styling
 * :D
