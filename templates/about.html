@@ -5,8 +5,12 @@
 {% block embed %}
 
 <div class="center textblock">
-
+{% if session["user_id"] %}
 <h1> Hello, {{dbs.execute("SELECT name FROM users WHERE id=" + str(session['user_id']))[0][0]}}! </h1>
+{% else %}
+<h1> Hello!</h1>
+{% endif %}
+
 
 <h3>Welcome to {{website_name}}.</h3><br>
 This is a project, that is supposed to look and work like game stores, such as steam or epic games.
