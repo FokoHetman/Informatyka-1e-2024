@@ -6,6 +6,7 @@
 * helpers (require login - wraps, apology)
 * browse
 * cart
+* wallet
 * pfp managment (you somehow fucked that up - done
 ## Others:
 * styling - done
