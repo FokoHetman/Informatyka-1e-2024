@@ -1,7 +1,7 @@
 # TODO!
 ## Graphics:
 * icon  - done
-* default user profile - done
+* default user profile - 70% done
 ## Backend:
 * helpers (require login - wraps, apology)
 * browse
