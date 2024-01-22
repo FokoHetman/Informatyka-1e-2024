@@ -29,12 +29,13 @@
   }
   body {
 
-    {% if session['user_id'] %}
-    background-image: url("{{url_for('static', filename=dbs.execute('SELECT image FROM themes WHERE id=' + str(dbs.execute("SELECT theme FROM users")[0][0]))[0][0])}}"); 
-    color: {{dbs.execute("SELECT fontcolor FROM themes WHERE id=" + str(dbs.execute("SELECT theme FROM users")[0][0]))[0][0]}}; 
-    {% else %}
-    background-image: url("{{url_for('static', filename=dbs.execute('SELECT image FROM themes WHERE id=0')[0][0])}}"); 
-    color: {{dbs.execute("SELECT fontcolor FROM themes WHERE id=0")[0][0]}};
+    {% if session['user_id'] %}     
+    background-image: url("{{url_for('static', filename=dbs.execute('SELECT image FROM themes WHERE id=' + str(dbs.execute("SELECT theme FROM users")[0][0]))[0][0])}}");     
+    color: {{dbs.execute("SELECT fontcolor FROM themes WHERE id=" + str(dbs.execute("SELECT theme FROM users")[0][0]))[0][0]}};      
+    {% else %}     
+    background-image: url("{{url_for('static', filename=dbs.execute('SELECT image FROM themes WHERE id=0')[0][0])}}");      
+    color: {{dbs.execute("SELECT fontcolor FROM themes WHERE id=0")[0][0]}};     
+    
     {% endif %}
     margin: 0;
     padding: 0;
