@@ -1,7 +1,7 @@
 #FOK COOKIN'
-from flask import Flask, request, render_template, redirect, session
+from flask import Flask, request, render_template, redirect, session, url_for
 from databases.handler import Handler
-#from helpers import apology, login_required
+from helpers import apology, login_required
 import os
 from werkzeug.security import check_password_hash, generate_password_hash
 from werkzeug.utils import secure_filename
@@ -38,6 +38,7 @@ def main():
 
 
 @app.route("/library", methods=["GET", "POST"])
+@login_required
 def library():
   name = dbs.execute("SELECT val FROM dynamic WHERE var='site_name'")[0][0]
   owneds = dbs.execute(f"SELECT games FROM users WHERE id={session['user_id']}")
@@ -122,7 +123,7 @@ def register():
     starters = dbs.execute("SELECT val FROM dynamic WHERE var='start_budget'")[0][0]
 
 
-    dbs.execute(f"INSERT INTO users (id, name, password, balance) VALUES ({len(users)+1}, '{username}', '{hashd}', {starters})")
+    dbs.execute(f"INSERT INTO users (id, name, password, balance, profile, theme, games) VALUES ({len(users)+1}, '{username}', '{hashd}', {starters}, 'images/profiles/default.png', 0, '')")
     session["user_id"] = int(len(users)+1)
 
 
@@ -146,6 +147,7 @@ def allowed_file(filename):
 
 
 @app.route("/profile", methods=["GET", "POST"])
+@login_required
 def profile():
   name = dbs.execute("SELECT val FROM dynamic WHERE var='site_name'")[0][0]
   if request.method=="POST":
@@ -186,9 +188,16 @@ def profile():
     return render_template("profile.html", website_name=name, str=str,dbs=dbs)
 
 
+@app.route("/changetheme", methods=["POST"])
+@login_required
+def change_theme():
+  theme_id = int(request.form['javascript_data'])
+  dbs.execute(f"UPDATE users SET theme={theme_id} WHERE id={session['user_id']}")
+  return ""
 
 
 '''DEV STUFF'''
+
 @app.route("/db", methods=["GET", "POST"]) # DEV DIR. JUST FOR DB CONF
 def db():
   q = request.args.get("q")

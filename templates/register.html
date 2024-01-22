@@ -5,15 +5,17 @@
 {% endblock %}
 
 {% block embed %}
-
+<div class="back_register">
   <form method="post" action="/register">
-
-    <input type=text name="username" placeholder="Username" class="username query center"></input>
-    <input type=password name="password" placeholder="Password" class="password query center"></input>
-    <input type=password name="password-confirm" placeholder="Confirm password" class="password query center"></input>
+    <p class="text_left">Name:</p>
+    <input type=text name="username" class="username query"></input>
+    <p class="text_left">Password:</p>
+    <input type=password name="password" class="password query"></input>
+    <p class="text_left">Confirm password:</p>
+    <input type=password name="password-confirm" class="password query"></input>
 
     <button name="submit" class="submit btn ">Submit</button>
 
   </form>
-
+</div>
 {% endblock %}

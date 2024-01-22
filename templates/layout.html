@@ -28,6 +28,14 @@
     
   }
   body {
+
+    {% if session['user_id'] %}
+    background-image: url("{{url_for('static', filename=dbs.execute('SELECT image FROM themes WHERE id=' + str(dbs.execute("SELECT theme FROM users")[0][0]))[0][0])}}"); 
+    color: {{dbs.execute("SELECT fontcolor FROM themes WHERE id=" + str(dbs.execute("SELECT theme FROM users")[0][0]))[0][0]}}; 
+    {% else %}
+    background-image: url("{{url_for('static', filename=dbs.execute('SELECT image FROM themes WHERE id=0')[0][0])}}"); 
+    color: {{dbs.execute("SELECT fontcolor FROM themes WHERE id=0")[0][0]}};
+    {% endif %}
     margin: 0;
     padding: 0;
   }
@@ -58,7 +66,21 @@
     transition: 1s;
     font-size: 16px;
   }
-  
+  .back_register {
+    margin: 0 auto;
+    padding: 20px;
+    width: 75%;
+    height: 40%;
+    border-radius: 10px;
+    font-size: medium;
+    background-color: rgba(0, 0, 0, 0.4);
+  }
+  .text_left {
+    text-align: left;
+    position: relative;
+    left: 25%;
+    margin: 4% 0% 1% 0%;
+  }
   .element:hover {
     transform: scale(1.2);
     opacity: 1;
@@ -71,10 +93,12 @@
     top: 25vh;
   }
   .query {
+    position: relative;
+    width: 50%;
+    margin: auto;
     border: 1.5px solid rgb(0, 0, 0);
-    border-radius: 6px;
+    border-radius: 3px;
     font: DaysOne;
-    margin-bottom: 1.5%;
     display: block;
   }
   .btn {
@@ -82,6 +106,7 @@
     border-radius: 10px;
     background: radial-gradient(rgb(3, 212, 3),green);
     width: 45%;
+    margin-top: 3.5%;
   }
   .btu {
     border: 2px solid black;
@@ -91,9 +116,9 @@
     background: radial-gradient(rgb(200, 2, 2),rgb(255, 1, 1));
     width: 45%;
   }
-  img {
+  .header_img {
     position: relative;
-    max-width: 16%;
+    max-width: 22%;
     bottom: 25%;
   }
   .lib_panel {
@@ -165,12 +190,33 @@
   position: relative;
   z-index: 1;
 }
+.theme-button {
+  background: transparent;
+  border: None;
+}
+.img_themes {
+  margin: None;
+  padding:None;
+  width: 100%;
+  height: 100%;
+}
+.div_themes {
+  margin: 0% 2.5% 0% 2.5%;
+  box-sizing: border-box;
+  float: left;
+  width: 45%;
+  height: 45%;
+  position: relative;
+}
+
   </style>
   
   <html>
   <head>
+
+
     <title> {% block title %} {% endblock %}</title>
-    
+
     <meta name="viewport" content="width=device-width, initial-scale=1">
   </head>
   <body>
@@ -191,16 +237,26 @@
     {% if session["user_id"] and library %}
     <div id="lib_panel" class="lib_panel">
       <h1> Library: </h1>
-        {% for i in games %}
-          <div id="game-libpanel" class="game-libpanel">
-            <img src=i[-1]></img>
-            <h2> title </h2>
+        {% for i in dbs.execute("SELECT * FROM games") %}
+          <div class="div_themes">
+            <button onclick="" oncl id="theme-libpanel" class="theme-button">
+              {{i[1]}}
+              <img class="img_themes" src="{{url_for('static', filename=i[2])}}">
+            </button>
+          </div>
         {% endfor %}
         </div>
         <div id="themes_panel" class="themes_panel">
           <h1 style="text-align: center;"> Themes: </h1>
           
-
+            {% for i in dbs.execute("SELECT * FROM themes") %}
+              <div class="div_themes">
+                <button onclick="theme_swap({{i[0]}})" oncl id="theme-libpanel" class="theme-button">
+                    <img class="img_themes" src="{{url_for('static', filename=i[2])}}">
+                </button>
+              </div>
+            {% endfor %}
+            <button onclick="refresh()" class="center btn">Refresh</button>
 
         </div>
     {% endif %}
@@ -209,8 +265,18 @@
     </div>
   </div>
   
-  
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> 
   <script>
+
+  function theme_swap(id) {
+    $.post( "/changetheme", {
+      javascript_data: id
+    });
+  }
+  function refresh() {
+    location.reload();
+  }
   
   function addPanelElement(hrf, name, id, add, notext) {
     var panel = document.getElementById(id);
@@ -254,10 +320,11 @@
     addPanelElement("profile", "profile", "panel", "profile", true);
   {% endif %}
   
-  function swapImg(obj, src) {
+  function swapImg(obj, src, add) {
     img = document.createElement("img");
     img.src=src;
     obj.appendChild(img);
+    img.className="header_img";
   }
   
   swapImg(document.getElementById("a{{website_name}}"), "{{url_for('static', filename='images/logo.png')}}");
