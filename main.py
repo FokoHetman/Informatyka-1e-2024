@@ -41,7 +41,7 @@ def main():
 @login_required
 def library():
   name = dbs.execute("SELECT val FROM dynamic WHERE var='site_name'")[0][0]
-  owneds = dbs.execute(f"SELECT games FROM users WHERE id={session['user_id']}")
+  '''owneds = dbs.execute(f"SELECT games FROM users WHERE id={session['user_id']}")
   games = []
   for i in list(owneds):
     games.append(dbs.execute(f"SELECT * FROM games WHERE id={i}"))
@@ -52,10 +52,9 @@ def library():
     for i in games:
       if query in i[0][1]:
         qgames.append(i)
-    
-    return render_template("library.html", games=qgames, str=str, dbs=dbs, website_name=name)
-  else:
-    return render_template("library.html", games=games, str=str, dbs=dbs, website_name=name)
+'''
+  #return render_template("library.html", games=qgames, str=str, dbs=dbs, website_name=name)
+  return render_template("library.html", str=str, dbs=dbs, website_name=name)
 
 
 @app.route("/browse", methods=["GET", "POST"]) # BROWSE METHOD. LOOK FOR NOT OWNED GAMES.
@@ -135,6 +134,7 @@ def register():
 def logout():
   session.clear()
   return redirect("/login")
+
 
 
 '''USER CUSTOMISATION'''
