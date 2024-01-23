@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="210mm"
+   height="297mm"
+   viewBox="0 0 210 297"
+   version="1.1"
+   id="svg17461"
+   sodipodi:docname="grantteftalto.svg"
+   inkscape:version="1.1.2 (0a00cf5339, 2022-02-04)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview17463"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:document-units="mm"
+     showgrid="false"
+     inkscape:zoom="0.73940797"
+     inkscape:cx="488.22844"
+     inkscape:cy="494.99061"
+     inkscape:window-width="1920"
+     inkscape:window-height="1046"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="layer1" />
+  <defs
+     id="defs17458">
+    <rect
+       x="93.787629"
+       y="187.59676"
+       width="143.36123"
+       height="157.67236"
+       id="rect21902" />
+  </defs>
+  <g
+     inkscape:label="Warstwa 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <g
+       id="g50716"
+       transform="matrix(1.2929214,0,0,1.2929214,-14.403753,-11.711453)">
+      <rect
+         style="fill:#000000;stroke-width:0.397145"
+         id="rect50104"
+         width="163.01451"
+         height="143.96561"
+         x="11.102745"
+         y="33.883156"
+         ry="0" />
+      <path
+         style="fill:#00ff00;stroke-width:0.317026"
+         d="m 67.554771,160.09568 c 0,-1.62414 0.06759,-1.86017 0.601333,-2.10023 1.239822,-0.55762 2.599232,-1.76995 3.511468,-3.1316 1.224816,-1.82822 2.569869,-6.09601 2.882172,-9.14499 0.175529,-1.71373 0.227243,-13.94433 0.179207,-42.39668 l -0.0675,-39.988084 -0.576222,-2.583145 c -0.316921,-1.420729 -0.940146,-3.429868 -1.384943,-4.464748 -0.902738,-2.10035 -2.926108,-4.425028 -4.265491,-4.900678 -0.872136,-0.30972 -0.880011,-0.330662 -0.880011,-2.340466 v -2.02795 h 25.584007 25.584019 v 1.346313 c 0,1.269268 -0.072,1.377557 -1.25735,1.892274 -2.57522,1.118222 -4.55581,4.290892 -5.67849,9.096293 l -0.60817,2.603207 v 41.596814 41.59683 l 0.60899,2.42959 c 0.33496,1.33624 0.95818,3.24197 1.38495,4.23493 0.94356,2.19533 3.03865,4.47428 4.48376,4.87724 l 1.06631,0.29733 v 2.46878 2.46875 H 93.138779 67.554771 Z"
+         id="path49668" />
+      <text
+         xml:space="preserve"
+         transform="matrix(0.59907642,0,0,0.59907642,-5.8238805,-49.123499)"
+         id="text21900"
+         style="font-style:normal;font-weight:normal;font-size:40px;line-height:1.25;font-family:sans-serif;text-align:center;white-space:pre;shape-inside:url(#rect21902);fill:#d40000;fill-opacity:1;stroke:none"
+         x="69.560547"
+         y="0"><tspan
+           x="96.024414"
+           y="222.98828"
+           id="tspan51001">GRANT
+</tspan><tspan
+           x="117.24512"
+           y="272.98828"
+           id="tspan51003">TEFT
+</tspan><tspan
+           x="112.58691"
+           y="322.98828"
+           id="tspan51005">AŁTO</tspan></text>
+    </g>
+  </g>
+</svg>
