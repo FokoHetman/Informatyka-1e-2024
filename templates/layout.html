@@ -28,7 +28,7 @@
     
   }
   body {
-
+    background-attachment: fixed;
     {% if session['user_id'] %}     
     background-image: url("{{url_for('static', filename=dbs.execute('SELECT image FROM themes WHERE id=' + str(dbs.execute("SELECT theme FROM users")[0][0]))[0][0])}}");     
     color: {{dbs.execute("SELECT fontcolor FROM themes WHERE id=" + str(dbs.execute("SELECT theme FROM users")[0][0]))[0][0]}};      
@@ -205,8 +205,8 @@
   margin: 0% 2.5% 0% 2.5%;
   box-sizing: border-box;
   float: left;
-  width: 45%;
-  height: 45%;
+  width: 30%;
+  height: 30%;
   position: relative;
 }
 
