@@ -1,0 +1,352 @@
+<style>
+  @media (min-width:320px)  { 
+    /* smartphones, portrait iPhone, portrait 480x320 phones (Android) */
+    .lib_panel {
+      width: 8%;
+      display: block;
+    }  
+  }
+  
+  @font-face {
+    font-family: DaysOne;
+    src: url("{{url_for('static', filename='fonts/DaysOne-Regular.ttf')}}") format('truetype');
+  }
+  
+  a {
+    color: rgba(200, 200, 200, 0.8);
+    text-decoration: none;
+  }
+  a:link {
+    color: rgba(200, 200, 200, 0.8);
+    text-decoration: none;
+  }
+  body, html {
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    font-family: DaysOne;
+    height: 100%;
+    
+  }
+  body {
+
+    {% if session['user_id'] %}     
+    background-image: url("{{url_for('static', filename=dbs.execute('SELECT image FROM themes WHERE id=' + str(dbs.execute("SELECT theme FROM users")[0][0]))[0][0])}}");     
+    color: {{dbs.execute("SELECT fontcolor FROM themes WHERE id=" + str(dbs.execute("SELECT theme FROM users")[0][0]))[0][0]}};      
+    {% else %}     
+    background-image: url("{{url_for('static', filename=dbs.execute('SELECT image FROM themes WHERE id=0')[0][0])}}");      
+    color: {{dbs.execute("SELECT fontcolor FROM themes WHERE id=0")[0][0]}};     
+    
+    {% endif %}
+    margin: 0;
+    padding: 0;
+  }
+  .center {
+    width: 50%;
+    position: relative;
+    margin: auto;
+    text-align: center;
+  }
+  .panel {
+    right: 0.7%;
+    width: 100%;
+    height: 6%;
+    position: fixed;
+    display: flex;
+    background-color: rgb(79, 77, 77);
+    padding: 10px;
+    vertical-align: middle;
+  }
+  
+  .element {
+    bottom: 25%;  
+    width: 20%;
+    height: 100%;
+    position: relative;
+    margin-right: 1%;
+    text-align: center;
+    transition: 1s;
+    font-size: 16px;
+  }
+  .back_register {
+    margin: 0 auto;
+    padding: 20px;
+    width: 75%;
+    height: 40%;
+    border-radius: 10px;
+    font-size: medium;
+    background-color: rgba(0, 0, 0, 0.4);
+  }
+  .text_left {
+    text-align: left;
+    position: relative;
+    left: 25%;
+    margin: 4% 0% 1% 0%;
+  }
+  .element:hover {
+    transform: scale(1.2);
+    opacity: 1;
+  }
+  .embed {
+    position: relative;
+    font-size: 12px;
+    font: DaysOne;
+    left: 0%;
+    top: 25vh;
+  }
+  .query {
+    position: relative;
+    width: 50%;
+    margin: auto;
+    border: 1.5px solid rgb(0, 0, 0);
+    border-radius: 3px;
+    font: DaysOne;
+    display: block;
+  }
+  .btn {
+    border: 1px solid black;
+    border-radius: 10px;
+    background: radial-gradient(rgb(3, 212, 3),green);
+    width: 45%;
+    margin-top: 3.5%;
+  }
+  .btu {
+    border: 2px solid black;
+    border-radius: 10px;
+    position: relative;
+    top: -1.5vh;
+    background: radial-gradient(rgb(200, 2, 2),rgb(255, 1, 1));
+    width: 45%;
+  }
+  .header_img {
+    position: relative;
+    max-width: 22%;
+    bottom: 25%;
+  }
+  .lib_panel {
+    display: block;
+    position: fixed;
+    color: white;
+    width: 2%;
+    background:linear-gradient(to bottom right,rgb(105, 105, 105) ,#bdbbbb);
+    font-size: 0.1px;
+    height: 50%;
+    transition: 1s;
+    top: 25%;
+    border: 1px solid black;
+    border-radius: 0% 15% 15% 0%;
+    margin-left: 0px;
+  }
+  .themes_panel {
+    display: block;
+    position: fixed;
+    color: white;
+    width: 2%;
+    background:linear-gradient(to bottom right,rgb(105, 105, 105) ,#bdbbbb);
+    font-size: 0.1px;
+    height: 50%;
+    transition: 1s;
+    top: 25%;
+    border: 1px solid black;
+    border-radius: 15% 0% 0% 15%;
+    right: 0%;
+  }
+  .lib_panel:hover {
+    width: 20%;
+    font-size: 12px;
+    display: block;
+    .lib-panelbtn {
+      display: block;
+    }
+  }
+    .themes_panel:hover {
+    width: 20%;
+    font-size: 12px;
+    display: block;
+    .lib-panelbtn {
+      display: block;
+    }
+  }
+  .lib-panelbtn {
+    display: none;
+  }
+  .themes-panelbtn {
+    display: none;
+  }
+  .textblock {
+    background-color: rgba(25, 25, 25, 0.4);
+    color: white;
+    border: 2px solid black;
+    border-radius: 5px;
+    padding: 25px;
+    width: 75%;
+    font-size: 120%;
+    text-align: left;
+  }
+  
+  .paneltxt {
+    position: relative;
+    top: 50%;
+  }
+  .lay {
+  position: relative;
+  z-index: 1;
+}
+.theme-button {
+  background: transparent;
+  border: None;
+}
+.img_themes {
+  margin: None;
+  padding:None;
+  width: 100%;
+  height: 100%;
+}
+.div_themes {
+  margin: 0% 2.5% 0% 2.5%;
+  box-sizing: border-box;
+  float: left;
+  width: 45%;
+  height: 45%;
+  position: relative;
+}
+
+  </style>
+  
+
+//end of css begining of html
+
+
+  <html>
+  <head>
+
+
+    <title> {% block title %} {% endblock %}</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+  </head>
+  <body>
+  <div class="all">
+  
+  
+    {% if session["user_id"] %}
+        <div class="lay">
+          <div id="panel" class="panel center">
+          </div>
+          </div>
+    {% else %}
+      <div class="lay">
+        <div id="panel2" class="panel center">
+        </div>
+      </div>
+    {% endif %}
+    {% if session["user_id"] and library %}
+    <div id="lib_panel" class="lib_panel">
+      <h1> Library: </h1>
+        {% for i in dbs.execute("SELECT * FROM games") %}
+          <div class="div_themes">
+            <button onclick="" oncl id="theme-libpanel" class="theme-button">
+              {{i[1]}}
+              <img class="img_themes" src="{{url_for('static', filename=i[2])}}">
+            </button>
+          </div>
+        {% endfor %}
+        </div>
+        <div id="themes_panel" class="themes_panel">
+          <h1 style="text-align: center;"> Themes: </h1>
+          
+            {% for i in dbs.execute("SELECT * FROM themes") %}
+              <div class="div_themes">
+                <button onclick="theme_swap({{i[0]}})" oncl id="theme-libpanel" class="theme-button">
+                    <img class="img_themes" src="{{url_for('static', filename=i[2])}}">
+                </button>
+              </div>
+            {% endfor %}
+            <button onclick="refresh()" class="center btn">Refresh</button>
+
+        </div>
+    {% endif %}
+    <div id="embed" class="embed center">
+    {% block embed %} {% endblock %}
+    </div>
+  </div>
+  
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> 
+  <script>
+
+  function theme_swap(id) {
+    $.post( "/changetheme", {
+      javascript_data: id
+    });
+  }
+  function refresh() {
+    location.reload();
+  }
+  
+  function addPanelElement(hrf, name, id, add, notext) {
+    var panel = document.getElementById(id);
+    var a = document.createElement("a");
+    if (!notext) {
+      a.innerText=name;
+    }
+    a.href=hrf;
+    a.className="paneltxt";
+    a.id = "a"+name;
+  
+    var div = document.createElement("div");
+    div.id=name;
+    div.className="element";
+    if (add) {
+      div.className="element " + add;
+    }
+  
+    panel.appendChild(div);
+    document.getElementById(name).appendChild(a);
+  }
+  
+  {% if not session["user_id"] %}
+    addPanelElement("/", "{{website_name}}", "panel2", "logo", true);
+    addPanelElement("about", "About", "panel2", "about");
+    addPanelElement("browse", "Browse", "panel2", "browse");
+    addPanelElement("basket", "Basket", "panel2", "basket");
+    addPanelElement("library", "Library", "panel2", "library");
+  
+  
+    addPanelElement("login", "Login", "panel2", "loginpart");
+    addPanelElement("register", "Register", "panel2", "loginpart");
+  {% else %}
+    addPanelElement("/", "{{website_name}}", "panel", "logo", true);
+    addPanelElement("about", "About", "panel", "about");
+    addPanelElement("browse", "Browse", "panel", "browse");
+    addPanelElement("basket", "Basket", "panel", "basket");
+    addPanelElement("library", "Library", "panel", "library");
+  
+  
+    addPanelElement("profile", "profile", "panel", "profile", true);
+  {% endif %}
+  
+  function swapImg(obj, src, add) {
+    img = document.createElement("img");
+    img.src=src;
+    obj.appendChild(img);
+    img.className="header_img";
+  }
+  
+  swapImg(document.getElementById("a{{website_name}}"), "{{url_for('static', filename='images/logo.png')}}");
+  {% if session["user_id"] %}
+  swapImg(document.getElementById("aprofile"), "{{url_for('static', filename='images/profiles/' + str(session['user_id']) + '.png')}}");
+  {% else %}
+  swapImg(document.getElementById("aprofile"), 
+    "{{url_for('static', filename=dbs.execute('SELECT val FROM dynamic WHERE var=\'defprof\''))}}");
+  
+  {% endif %}
+  
+  function myFunction() {
+    document.getElementById("demo").innerHTML = "It's not my problem";
+    document.getElementById("my_button").style.visibility = "hidden";
+  }
+  </script>
+  </body>
+  </html>
+  
+  
