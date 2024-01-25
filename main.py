@@ -195,6 +195,13 @@ def change_theme():
   dbs.execute(f"UPDATE users SET theme={theme_id} WHERE id={session['user_id']}")
   return ""
 
+@app.route("/gameview")
+def gameview():
+  name = dbs.execute("SELECT val FROM dynamic WHERE var='site_name'")[0][0]
+  game = dbs.execute(f"SELECT * FROM games WHERE id={request.form['gameid']}")
+  print('hi')
+
+  return render_template("gameview.html", game=game, dbs=dbs, website_name=name, str=str)
 
 '''DEV STUFF'''
 

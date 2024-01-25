@@ -1,0 +1,47 @@
+<style>
+    .browse-table {
+        background-color: rgb(200, 200, 200);
+
+    }
+    .browse-game-button {
+        width: 100%;
+        height: 20%;
+    }
+</style>
+
+
+
+{% extends "layout.html" %}
+
+{% block title %} {{website_name}} {% endblock %}
+
+{% block embed %}
+
+<div class="center textbox">
+<div class="center browse-table">
+{% for i in dbs.execute("SELECT * FROM games") %}
+<div class="div_themes">
+    <button onclick="getGame({{i[0]}})" oncl id="browse-game-button" class="browse-game-button">
+        {{i[1]}}
+        <img class="img_themes" src="{{url_for('static', filename=i[2])}}">
+    </button>
+</div>
+
+{% endfor %}
+</div>
+</div>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> 
+<script>
+
+function getGame(id) {
+
+    $.get( "/gameview", {
+      gameid: id
+    });
+}
+
+</script>
+
+{% endblock %}
