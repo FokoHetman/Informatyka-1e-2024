@@ -1,5 +1,5 @@
 <style>
-@media (min-width:320px)  { 
+  @media (min-width:320px)  { 
     /* smartphones, portrait iPhone, portrait 480x320 phones (Android) */
     .lib_panel {
       width: 8%;
@@ -30,10 +30,10 @@
   body {
     background-attachment: fixed;
     {% if session['user_id'] %}     
-    background-image: url("{{url_for('static',filename=dbs.execute('SELECT image FROM themes WHERE id=' + str(dbs.execute("SELECT theme FROM users")[0][0]))[0][0])}}");     
+    background-image: url("{{url_for('static', filename=dbs.execute('SELECT image FROM themes WHERE id=' + str(dbs.execute("SELECT theme FROM users")[0][0]))[0][0])}}");     
     color: {{dbs.execute("SELECT fontcolor FROM themes WHERE id=" + str(dbs.execute("SELECT theme FROM users")[0][0]))[0][0]}};      
     {% else %}     
-    background-image: url("{{url_for('static',filename=dbs.execute('SELECT image FROM themes WHERE id=0')[0][0])}}");      
+    background-image: url("{{url_for('static', filename=dbs.execute('SELECT image FROM themes WHERE id=0')[0][0])}}");      
     color: {{dbs.execute("SELECT fontcolor FROM themes WHERE id=0")[0][0]}};     
     
     {% endif %}
@@ -97,8 +97,8 @@
     position: relative;
     width: 50%;
     margin: auto;
-    border: 3px solid rgb(0, 0, 0);
-    border-radius: 5px;
+    border: 1.5px solid rgb(0, 0, 0);
+    border-radius: 3px;
     font: DaysOne;
     display: block;
   }
@@ -106,7 +106,7 @@
     border: 1px solid black;
     border-radius: 10px;
     background: radial-gradient(rgb(3, 212, 3),green);
-    width: 45%;
+    width: 40%;
     margin-top: 3.5%;
   }
   .btu {
@@ -165,6 +165,9 @@
     .lib-panelbtn {
       display: block;
     }
+    .refresh_pos {
+      visibility: visible;
+    }
   }
   .lib-panelbtn {
     display: none;
@@ -190,6 +193,10 @@
   .lay {
   position: relative;
   z-index: 1;
+}
+.theme-button {
+  background: transparent;
+  border: None;
 }
 .img_themes {
   margin: None;
@@ -223,14 +230,6 @@
   margin-right: auto;
   transition-duration: 0.5s;
   visibility: hidden;
-}
-@s_password {
-  visibility: hidden ;
-}
-@s_username {
-}
-@s_image {
-
 }
 </style>
 <html>
