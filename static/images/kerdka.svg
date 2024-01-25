@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="210mm"
+   height="297mm"
+   viewBox="0 0 210 297"
+   version="1.1"
+   id="svg72383"
+   inkscape:version="1.1.2 (0a00cf5339, 2022-02-04)"
+   sodipodi:docname="kerdka.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview72385"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:document-units="mm"
+     showgrid="false"
+     inkscape:zoom="0.73940797"
+     inkscape:cx="394.23432"
+     inkscape:cy="476.05654"
+     inkscape:window-width="1920"
+     inkscape:window-height="1012"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1" />
+  <defs
+     id="defs72380">
+    <rect
+       x="203.9258"
+       y="961.84063"
+       width="125.59198"
+       height="105.54445"
+       id="rect20197" />
+    <rect
+       x="29.729926"
+       y="867.14272"
+       width="144.65139"
+       height="156.6225"
+       id="rect9039" />
+    <rect
+       x="46.381761"
+       y="192.36408"
+       width="204.89026"
+       height="178.80974"
+       id="rect75966" />
+  </defs>
+  <g
+     inkscape:label="Warstwa 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <text
+       xml:space="preserve"
+       transform="matrix(-6.6716572,0,0,-6.6716572,396.48557,6042.6776)"
+       id="text9037"
+       style="font-style:normal;font-weight:normal;font-size:40px;line-height:1.25;font-family:sans-serif;white-space:pre;shape-inside:url(#rect9039);fill:#ff2a2a;fill-opacity:1;stroke:none"><tspan
+         x="29.730469"
+         y="902.5332"
+         id="tspan23016">V</tspan></text>
+    <rect
+       style="fill:#ff5555;stroke-width:0.402661"
+       id="rect22759"
+       width="172.15425"
+       height="83.330505"
+       x="20.271273"
+       y="86.852051"
+       ry="41.665253" />
+    <text
+       xml:space="preserve"
+       transform="matrix(0.71032504,0,0,0.71032504,0.30130384,-46.246855)"
+       id="text75964"
+       style="font-style:normal;font-weight:normal;font-size:40px;line-height:1.25;font-family:sans-serif;text-align:center;white-space:pre;shape-inside:url(#rect75966);fill:#000000;fill-opacity:1;stroke:none"
+       x="77.783203"
+       y="0"><tspan
+         x="79.441406"
+         y="227.75391"
+         id="tspan23018">Kredka
+</tspan><tspan
+         x="69.548828"
+         y="277.75391"
+         id="tspan23020">Zabójcy</tspan></text>
+  </g>
+</svg>
