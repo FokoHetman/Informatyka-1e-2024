@@ -1,5 +1,5 @@
 <style>
-  @media (min-width:320px)  { 
+@media (min-width:320px)  { 
     /* smartphones, portrait iPhone, portrait 480x320 phones (Android) */
     .lib_panel {
       width: 8%;
@@ -30,10 +30,10 @@
   body {
     background-attachment: fixed;
     {% if session['user_id'] %}     
-    background-image: url("{{url_for('static', filename=dbs.execute('SELECT image FROM themes WHERE id=' + str(dbs.execute("SELECT theme FROM users")[0][0]))[0][0])}}");     
+    background-image: url("{{url_for('static',filename=dbs.execute('SELECT image FROM themes WHERE id=' + str(dbs.execute("SELECT theme FROM users")[0][0]))[0][0])}}");     
     color: {{dbs.execute("SELECT fontcolor FROM themes WHERE id=" + str(dbs.execute("SELECT theme FROM users")[0][0]))[0][0]}};      
     {% else %}     
-    background-image: url("{{url_for('static', filename=dbs.execute('SELECT image FROM themes WHERE id=0')[0][0])}}");      
+    background-image: url("{{url_for('static',filename=dbs.execute('SELECT image FROM themes WHERE id=0')[0][0])}}");      
     color: {{dbs.execute("SELECT fontcolor FROM themes WHERE id=0")[0][0]}};     
     
     {% endif %}
@@ -97,8 +97,8 @@
     position: relative;
     width: 50%;
     margin: auto;
-    border: 1.5px solid rgb(0, 0, 0);
-    border-radius: 3px;
+    border: 3px solid rgb(0, 0, 0);
+    border-radius: 5px;
     font: DaysOne;
     display: block;
   }
@@ -209,7 +209,10 @@
   height: 30%;
   position: relative;
 }
-
+@s_password {
+}
+@s_username {
+}
 </style>
 <html>
   <head>
@@ -344,5 +347,5 @@
   </script>
   </body>
   </html>
-
-</style>
+  
+  
