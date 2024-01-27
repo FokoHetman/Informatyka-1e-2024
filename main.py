@@ -89,7 +89,7 @@ def login():
           puser = i
 
     if len(puser)==0:
-      return "apology('Username or password is incorrect!')" # apology mmot implemented yet
+      return apology('Username or password is incorrect!') # apology mmot implemented yet
 
 
     session["user_id"] = puser[0]
@@ -122,7 +122,7 @@ def register():
     starters = dbs.execute("SELECT val FROM dynamic WHERE var='start_budget'")[0][0]
 
 
-    dbs.execute(f"INSERT INTO users (id, name, password, balance, profile, theme, games) VALUES ({len(users)+1}, '{username}', '{hashd}', {starters}, 'images/profiles/default.png', 0, '')")
+    dbs.execute(f"INSERT INTO users (id, name, password, balance, profile, theme, games) VALUES ({len(users)+1}, '{username}', '{hashd}', {starters}, 'images/profiles/default.svg', 0, '')")
     session["user_id"] = int(len(users)+1)
 
 
