@@ -30,8 +30,8 @@
   body {
     background-attachment: fixed;
     {% if session['user_id'] %}     
-    background-image: url("{{url_for('static', filename=dbs.execute('SELECT image FROM themes WHERE id=' + str(dbs.execute("SELECT theme FROM users WHERE id=" + str(session['user_id']))[0][0]))[0][0])}}");     
-    color: {{dbs.execute("SELECT fontcolor FROM themes WHERE id=" + str(dbs.execute("SELECT theme FROM users WHERE id=" + str(session['user_id']))[0][0]))[0][0]}};      
+    background-image: url("{{url_for('static', filename=dbs.execute('SELECT image FROM themes WHERE id=' + str(dbs.execute("SELECT theme FROM users")[0][0]))[0][0])}}");     
+    color: {{dbs.execute("SELECT fontcolor FROM themes WHERE id=" + str(dbs.execute("SELECT theme FROM users")[0][0]))[0][0]}};      
     {% else %}     
     background-image: url("{{url_for('static', filename=dbs.execute('SELECT image FROM themes WHERE id=0')[0][0])}}");      
     color: {{dbs.execute("SELECT fontcolor FROM themes WHERE id=0")[0][0]}};     
@@ -157,9 +157,6 @@
     .lib-panelbtn {
       display: block;
     }
-    .lib_all {
-      visibility: visible;
-}
   }
     .themes_panel:hover {
     width: 20%;
@@ -234,41 +231,6 @@
   transition-duration: 0.5s;
   visibility: hidden;
 }
-.div_lib {
-  margin: ;
-  box-sizing: border-box;
-  float: left;
-  width: 25%;
-  height: 25%;
-  position: relative;
-}
-.lib_all {
-  visibility: hidden;
-  transition: 0.5s;
-  position: relative;
-  top:-7%;
-  left: 10%;
-}
-.img_lib {
-    height: 50%;
-    width: 60%;
-}
-.lib_name {
-    position:relative;
-    top:-20px;
-    
-}
-.s_password{
-    visibility:hidden;
-    position:relative;
-    top:-10%;
-}
-.s_image{
-    visibility:hidden;
-}
-.s_username{
-    visibility:hidden;
-}
 </style>
 <html>
   <head>
@@ -292,25 +254,17 @@
         </div>
       </div>
     {% endif %}
-
-
-
     {% if session["user_id"] and library %}
     <div id="lib_panel" class="lib_panel">
       <h1> Library: </h1>
-        <div class="lib_all">
         {% for i in dbs.execute("SELECT * FROM games") %}
-          <div class="div_lib">
-            <button onclick="" oncl id="theme-libpanel" class="theme-button">           
+          <div class="div_themes">
+            <button onclick="" oncl id="theme-libpanel" class="theme-button">
+              {{i[1]}}
               <img class="img_themes" src="{{url_for('static', filename=i[2])}}">
-                <div class="lib_name"><h6>{{i[1]}}</h6></div>
             </button>
           </div>
         {% endfor %}
-        </div>
-
-
-
         </div>
         <div id="themes_panel" class="themes_panel">
           <h1 style="text-align: center;"> Themes: </h1>
@@ -319,7 +273,7 @@
             {% for i in dbs.execute("SELECT * FROM themes") %}
               <div class="div_themes">
                 <button onclick="theme_swap({{i[0]}})" oncl id="theme-libpanel" class="theme-button">
-                    <img class="img_lib" src="{{url_for('static', filename=i[2])}}">
+                    <img class="img_themes" src="{{url_for('static', filename=i[2])}}">
                 </button>
               </div>
             {% endfor %}
@@ -405,10 +359,6 @@
   function myFunction() {
     document.getElementById("demo").innerHTML = "It's not my problem";
     document.getElementById("my_button").style.visibility = "hidden";
-  }
-  function myFunctionp() {
-    document.getElementById("s_password").style.visibility = "visible";
-    document.getElementById("my_button1").style.visibility = "hidden";
   }
   </script>
   </body>

@@ -7,8 +7,7 @@
 <form action="/profile" method="post" enctype=multipart/form-data>
   <a class="center btu" href="/logout"> Log out </a>
 </form>
-<button id="my_button1" style=" color:rgb(217, 3, 3); font-weight: bold; " onclick="myFunctionp()">Change password</button>
-<form id="s_password" class="s_password" action="/profile" method="post" enctype=multipart/form-data>
+<form id="s_password"action="/profile" method="post" enctype=multipart/form-data>
   <input type=password class="query center" name="npassword" placeholder="New Password"></input>
   <input type=password class="query center" name="npassword-conf" placeholder="Confirm New Password"></input>
   <input type=password class="query center" name="opassword" placeholder="Old Password"></input>
@@ -17,14 +16,14 @@
   
 </form>
 
-<form class="s_username" action="/profile" method="post" enctype=multipart/form-data>
+<form id="s_username" action="/profile" method="post" enctype=multipart/form-data>
 <input type=text class="query center" name="nusername" placeholder="New Username"></input>
 <input type=password class="query center" name="opassword" placeholder="Password"></input>
 <button type=submit class="center submit btn"> Submit </button>
 
 </from>
 
-<form class="s_image" action="/profile" method="post" enctype=multipart/form-data>
+<form id="s_image" action="/profile" method="post" enctype=multipart/form-data>
 <input type=file class="query center" name=file placeholder="pfp"></input>
 <button type=submit class="center submit btn"> Submit </button>
 
