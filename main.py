@@ -89,12 +89,8 @@ def login():
           puser = i
 
     if len(puser)==0:
-<<<<<<< HEAD
-      return apology('Username or password is incorrect!')
-=======
-      return apology('Username or password is incorrect!') # apology mmot implemented yet
+      return apology('Username or password is incorrect!', dbs=dbs) # apology mmot implemented yet
 
->>>>>>> refs/remotes/origin/main
 
     session["user_id"] = puser[0]
 
@@ -115,23 +111,20 @@ def register():
 
     if passwd!=passwd_conf:
 
-      return apology("Passwords don't match", 101)
+      return apology("Passwords don't match", dbs=dbs)
     users = dbs.execute("select name FROM users")
 
     for i in users:
       if username==i[0]:
-        return apology('Username already taken', 102)
+        return apology('Username already taken', dbs=dbs)
+
 
 
     hashd = generate_password_hash(passwd)
     starters = dbs.execute("SELECT val FROM dynamic WHERE var='start_budget'")[0][0]
 
 
-<<<<<<< HEAD
     dbs.execute(f"INSERT INTO users (id, name, password, balance, profile, theme, games, cart) VALUES ({len(users)+1}, '{username}', '{hashd}', {starters}, 'images/profiles/default.png', 0, '', '')")
-=======
-    dbs.execute(f"INSERT INTO users (id, name, password, balance, profile, theme, games) VALUES ({len(users)+1}, '{username}', '{hashd}', {starters}, 'images/profiles/default.svg', 0, '')")
->>>>>>> refs/remotes/origin/main
     session["user_id"] = int(len(users)+1)
 
 
