@@ -89,8 +89,7 @@ def login():
           puser = i
 
     if len(puser)==0:
-      return "apology('Username or password is incorrect!')" # apology mmot implemented yet
-
+      return apology('Username or password is incorrect!')
 
     session["user_id"] = puser[0]
 
@@ -110,19 +109,20 @@ def register():
 
 
     if passwd!=passwd_conf:
-      return "apology('Passwords don't match', 101)" # apology not implemented yet!
+
+      return apology("Passwords don't match", 101)
     users = dbs.execute("select name FROM users")
 
     for i in users:
       if username==i[0]:
-        return "apology('Username already taken', 102)"
+        return apology('Username already taken', 102)
 
 
     hashd = generate_password_hash(passwd)
     starters = dbs.execute("SELECT val FROM dynamic WHERE var='start_budget'")[0][0]
 
 
-    dbs.execute(f"INSERT INTO users (id, name, password, balance, profile, theme, games) VALUES ({len(users)+1}, '{username}', '{hashd}', {starters}, 'images/profiles/default.png', 0, '')")
+    dbs.execute(f"INSERT INTO users (id, name, password, balance, profile, theme, games, cart) VALUES ({len(users)+1}, '{username}', '{hashd}', {starters}, 'images/profiles/default.png', 0, '', '')")
     session["user_id"] = int(len(users)+1)
 
 
@@ -135,7 +135,107 @@ def logout():
   session.clear()
   return redirect("/login")
 
+# Funny red dot in visual studio code on the left
 
+'''CART AND GAME MANAGMENT'''
+@app.route("/gameview")
+def gameview():
+  id = request.args['id']
+  name = dbs.execute("SELECT val FROM dynamic WHERE var='site_name'")[0][0]
+  game = dbs.execute(f"SELECT * FROM games WHERE id={id}")[0]
+  print('hi')
+
+  print(id)
+
+  return render_template("gameview.html", game=game, dbs=dbs, website_name=name, str=str)
+
+@app.route('/cart')
+@login_required
+def cart():
+  name = dbs.execute("SELECT val FROM dynamic WHERE var='site_name'")[0][0]
+  game_sum = 0
+  for i in dbs.execute("SELECT * FROM games"):
+    if str(i[0]) in dbs.execute("SELECT cart FROM users WHERE id=" + str(session['user_id']))[0][0]:
+      game_sum+=i[-1]
+  return render_template("cart.html", dbs=dbs, website_name=name, str=str, game_sum=game_sum)
+
+
+@app.route('/modcart')
+@login_required
+def modcart():
+  id = request.args['id']
+  name = dbs.execute("SELECT val FROM dynamic WHERE var='site_name'")[0][0]
+
+  owned = dbs.execute("SELECT games FROM users WHERE id=" + str(session['user_id']))[0][0]
+
+  if str(id) in owned:
+    return apology("You already own that game!", dbs=dbs)
+
+  ncart = ""
+  if dbs.execute("SELECT cart FROM users WHERE id=" + str(session["user_id"]))[0][0]:
+    ncart+=str(dbs.execute("SELECT cart FROM users WHERE id=" + str(session["user_id"]))[0][0])
+
+  if str(id) not in ncart:
+    ncart+=str(id)
+  dbs.execute(f"UPDATE users SET cart='{ncart}' WHERE id=" + str(session['user_id']))
+
+  return redirect(url_for('cart'))
+
+@app.route('/modcartdel')
+@login_required
+def modcartdel():
+  id = request.args['id']
+  name = dbs.execute("SELECT val FROM dynamic WHERE var='site_name'")[0][0]
+
+  ncart = ""
+  if dbs.execute("SELECT cart FROM users WHERE id=" + str(session["user_id"]))[0][0]:
+    ncart+=str(dbs.execute("SELECT cart FROM users WHERE id=" + str(session["user_id"]))[0][0])
+
+  if str(id) in ncart:
+    ncart=ncart.replace(str(id), "", 1)
+  dbs.execute(f"UPDATE users SET cart='{ncart}' WHERE id=" + str(session['user_id']))
+
+  return redirect(url_for('cart'))
+
+
+@app.route("/buycart")
+@login_required
+def buyall():
+  game_sum=0
+  cart = dbs.execute("SELECT cart FROM users WHERE id=" + str(session['user_id']))[0][0]
+  owned = dbs.execute("SELECT games FROM users WHERE id=" + str(session['user_id']))[0][0]
+  print(owned)
+  
+  for i in dbs.execute("SELECT * FROM games"):
+    if str(i[0]) in cart and str(i[0]) not in owned:
+      game_sum+=i[-1]
+  if game_sum>dbs.execute("SELECT balance FROM users WHERE id=" + str(session['user_id']))[0][0]:
+    return apology("You don't have enough cash!", dbs=dbs)
+
+  ngames = ""
+  if owned:
+    ngames+=owned
+  for i in dbs.execute("SELECT * FROM games"):
+    if str(i[0]) in cart:
+      ngames+=str(i[0])
+  nbal = dbs.execute("SELECT balance FROM users WHERE id="+str(session['user_id']))[0][0]-game_sum
+  dbs.execute(f"UPDATE users SET games='{ngames}', cart='', balance={nbal} WHERE id="+str(session['user_id']))
+  return redirect('library')
+
+
+
+@app.route("/buy")
+def buy():
+  id = request.args["id"]
+
+  if dbs.execute("SELECT price FROM games WHERE id="+str(id))[0][0]>dbs.execute("SELECT balance FROM users WHERE id=" + str(session['user_id']))[0][0]:
+    return apology("You don't have enough cash!", dbs=dbs)
+  new_bal = dbs.execute("SELECT balance FROM users WHERE id=" + str(session['user_id']))[0][0] - dbs.execute("SELECT price FROM games WHERE id="+str(id))[0][0]
+
+  ngames = dbs.execute("SELECT games FROM users WHERE id="+str(session['user_id']))[0][0] + str(id)
+
+  dbs.execute(f"UPDATE users SET balance={new_bal}, games='{ngames}' WHERE id="+str(session['user_id']))
+  return redirect('library')
 
 '''USER CUSTOMISATION'''
 
@@ -161,11 +261,11 @@ def profile():
 
 
     if not check_password_hash(cur_passwd, old_passwd):
-      return "apology('incorrect password')"
+      return apology('incorrect password', dbs=dbs)
 
     if new_passwd:
       if new_passwd != new_passwd_conf:
-        return "apology('passwords dont match')"
+        return apology('passwords dont match', dbs=dbs)
       dbs.execute(f"UPDATE users SET password='{generate_password_hash(new_passwd)}' WHERE id={session['user_id']}")
 
 
@@ -195,13 +295,6 @@ def change_theme():
   dbs.execute(f"UPDATE users SET theme={theme_id} WHERE id={session['user_id']}")
   return ""
 
-@app.route("/gameview")
-def gameview():
-  name = dbs.execute("SELECT val FROM dynamic WHERE var='site_name'")[0][0]
-  game = dbs.execute(f"SELECT * FROM games WHERE id={request.form['gameid']}")
-  print('hi')
-
-  return render_template("gameview.html", game=game, dbs=dbs, website_name=name, str=str)
 
 '''DEV STUFF'''
 

@@ -4,20 +4,27 @@
 
 {% block embed %}
 
-<div class="center textbox">
-<div class="center">
+<div class="center textblock full">
 {% for i in dbs.execute("SELECT * FROM games") %}
 {% if str(i[0]) in dbs.execute("SELECT GAMES FROM users WHERE id="+str(session['user_id']))[0][0] %}
           <div class="div_themes">
-            <button onclick="" oncl id="theme-libpanel" class="theme-button">
-              {{i[1]}}
-              <img class="img_themes" src="{{url_for('static', filename=i[2])}}">
+            <button onclick="getGame({{i[0]}})" oncl id="browse-game-button" class="browse-game-button">
+                {{i[1]}}
+                <img class="img_themes" src="{{url_for('static', filename=i[2])}}">
             </button>
           </div>
           {% endif %}
 
 {% endfor %}
 </div>
-</div>
 
+<script>
+
+  function getGame(id) {
+  
+      location.href = "gameview?id="+id;
+  }
+  
+  </script>
+  
 {% endblock %}

@@ -1,15 +1,55 @@
 {% extends "layout.html" %}
 
+<style>
+    .gameimg {
+        position: relative;
+    }
+    .game {
+        display: inline;
+    }
+    .title {
+        display: inline;
+        width: 10%;
+    }
+</style>
+
+
 {% block title %} {{website_name}} {% endblock %}
 
 {% block embed %}
 
-<div class="center textbox">
-<div class="center">
+<div class="center textblock">
+<div class="game">
 
-nu
+<img src="{{url_for('static', filename=game[2])}}">
+<div>
+<h1>{{game[1]}}</h1>
+
+{% if str(game[0]) in dbs.execute("SELECT games FROM users WHERE id="+str(session['user_id'])) %}
+
+<button>Price:{{game[-1]}}</button>
+<button onclick="cartAct({{game[0]}})">Add to Cart</button>
+<button onclick="buy({{game[0]}})">Buy</button>
+</div>
+{% else %}
+
+<button> Play </button>
+
+{% endif %}
+{{game[3]}}
+
+{{game}}
 
 </div>
 </div>
-
+<script>
+    function cartAct(id) {
+        location.href = "modcart?id="+id;
+    }
+    
+    function buy(id) {
+        location.href = "buy?id="+id;
+    }
+    </script>
 {% endblock %}
+

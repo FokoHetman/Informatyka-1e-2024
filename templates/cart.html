@@ -1,0 +1,37 @@
+{% extends "layout.html" %}
+
+{% block title %} {{website_name}} {% endblock %}
+
+{% block embed %}
+{% for i in dbs.execute("SELECT * FROM games") %}
+{% if str(i[0]) in dbs.execute("SELECT cart FROM users WHERE id="+str(session['user_id']))[0][0] %}
+
+<div class="div_themes">
+    <button onclick="getGame({{i[0]}})" oncl id="browse-game-button" class="browse-game-button">
+        {{i[1]}}
+        <img class="img_themes" src="{{url_for('static', filename=i[2])}}">
+    </button>
+    <button onclick="modcart({{i[0]}}, 'del')">Remove from cart</button>
+</div>
+
+{% endif %}
+{% endfor %}
+<button onclick="buyall()"> Buy all for: {{game_sum}}</button>
+<script>
+    function modcart(id, act) {
+        if (act=='del') {
+            location.href = "modcartdel?id="+id;
+        }
+    }
+
+    function getGame(id) {
+    
+        location.href = "gameview?id="+id;
+    }
+    function buyall() {
+        location.href = "buycart"
+    }
+    
+    </script>
+
+{% endblock %}

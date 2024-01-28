@@ -17,7 +17,7 @@
 
 {% block embed %}
 
-<div class="center textbox">
+<div class="center textblock">
 <div class="center browse-table">
 {% for i in dbs.execute("SELECT * FROM games") %}
 <div class="div_themes">
@@ -32,14 +32,11 @@
 </div>
 
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> 
 <script>
 
 function getGame(id) {
 
-    $.get( "/gameview", {
-      gameid: id
-    });
+    location.href = "gameview?id="+id;
 }
 
 </script>
