@@ -117,6 +117,16 @@
     background: radial-gradient(rgb(200, 2, 2),rgb(255, 1, 1));
     width: 45%;
   }
+  .btf {
+    border: 2px solid black;
+    border-radius: 10px;
+    position: relative;
+    top: -1.5vh;
+    background: radial-gradient(rgb(200, 2, 2),rgb(255, 1, 1));
+    margin: auto;
+    padding: 0.5%;
+    text-align: center;
+  }
   .header_img {
     position: relative;
     max-width: 22%;
@@ -157,6 +167,9 @@
     .lib-panelbtn {
       display: block;
     }
+    .lib_all {
+      visibility: visible;
+}
   }
     .themes_panel:hover {
     width: 20%;
@@ -176,10 +189,10 @@
     display: none;
   }
   .textblock {
-    background-color: rgba(100, 100, 100, 0.5);
+    background-color: rgba(25, 25, 25, 0.4);
     color: white;
     border: 2px solid black;
-    border-radius: 25px;
+    border-radius: 5px;
     padding: 25px;
     width: 75%;
     font-size: 120%;
@@ -230,6 +243,71 @@
   margin-right: auto;
   transition-duration: 0.5s;
   visibility: hidden;
+}
+.div_lib {
+  margin: ;
+  box-sizing: border-box;
+  float: left;
+  width: 25%;
+  height: 25%;
+  position: relative;
+}
+.lib_all {
+  visibility: hidden;
+  transition: 0.5s;
+  position: relative;
+  top:-7%;
+  left: 10%;
+}
+.img_lib {
+    height: 50%;
+    width: 60%;
+}
+.lib_name {
+    position:relative;
+    top:-20px;
+    
+}
+.s_password{
+    visibility:hidden;
+    position: absolute;
+    width: 100%;
+    height: auto;
+    top: 15%;
+}
+.s_space {
+    margin-top: 2%;
+}
+.s_but {
+    background-color: rgb(99, 99, 99);
+    border-radius: 30px ;
+    width: 40%;
+    margin: 1%;
+    border: 3px double rgb(0, 0, 0,1);
+    
+}
+.s_image{
+  visibility:hidden;
+  position: absolute;
+  width: 100%;
+  height: auto;
+  top: 15%;
+}
+.s_username{
+  visibility:hidden;
+    position: absolute;
+    width: 100%;
+    height: auto;
+    top: 15%;
+}
+.s_return {
+  position: relative;
+  background: none;
+  border: none;
+  color: rgb(0, 0, 100);
+  font-weight: bold;
+  font-size: medium;
+  left: 20%;
 }
 </style>
 <html>
