@@ -353,9 +353,31 @@
   console.log("{{dbs.execute('SELECT profile FROM users WHERE id='+str(session['user_id']))[0][0]}}");
   {% endif %}
   
-  function myFunction() {
-    document.getElementById("demo").innerHTML = "It's not my problem";
-    document.getElementById("my_button").style.visibility = "hidden";
+    function myFunctionp() {
+    document.getElementById("s_password").style.visibility = "visible";
+    document.getElementById("my_button1").style.visibility = "hidden";
+    document.getElementById("my_button2").style.visibility = "hidden";
+    document.getElementById("my_button3").style.visibility = "hidden";
+  }
+  function myFunctionq() {
+    document.getElementById("s_username").style.visibility = "visible";
+    document.getElementById("my_button2").style.visibility = "hidden";
+    document.getElementById("my_button1").style.visibility = "hidden";
+    document.getElementById("my_button3").style.visibility = "hidden";
+  }
+  function myFunctiond() {
+    document.getElementById("s_image").style.visibility = "visible";
+    document.getElementById("my_button2").style.visibility = "hidden";
+    document.getElementById("my_button1").style.visibility = "hidden";
+    document.getElementById("my_button3").style.visibility = "hidden";
+  }
+  function function_return() {
+    document.getElementById("s_image").style.visibility = "hidden";
+    document.getElementById("s_username").style.visibility = "hidden";
+    document.getElementById("s_password").style.visibility = "hidden";
+    document.getElementById("my_button2").style.visibility = "visible";
+    document.getElementById("my_button1").style.visibility = "visible";
+    document.getElementById("my_button3").style.visibility = "visible";
   }
   </script>
   </body>
