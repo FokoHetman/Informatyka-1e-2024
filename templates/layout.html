@@ -106,7 +106,7 @@
     border: 1px solid black;
     border-radius: 10px;
     background: radial-gradient(rgb(3, 212, 3),green);
-    width: 45%;
+    width: 40%;
     margin-top: 3.5%;
   }
   .btu {
@@ -165,6 +165,9 @@
     .lib-panelbtn {
       display: block;
     }
+    .refresh_pos {
+      visibility: visible;
+    }
   }
   .lib-panelbtn {
     display: none;
@@ -197,19 +200,37 @@
 }
 .img_themes {
   margin: None;
-  padding:None;
-  width: 100%;
-  height: 100%;
+  padding: None;
+  width: 80%;
+  height: 80%;
 }
 .div_themes {
-  margin: 0% 2.5% 0% 2.5%;
+  margin: -35% -5% 0% 0%;
   box-sizing: border-box;
   float: left;
-  width: 30%;
-  height: 30%;
+  width: 45%;
+  height: 45%;
   position: relative;
 }
-
+.themes_pos {
+  position: relative;
+  left: 10%;
+  top: 27%;
+}
+.refresh_pos {
+  position: absolute;
+  left: 13%;
+  bottom: 7%;
+  border: 1px solid black;
+  border-radius: 10px;
+  background: radial-gradient(rgb(2, 163, 2),green);
+  width: 80%;
+  margin-top: 3.5%;
+  margin-left: auto;
+  margin-right: auto;
+  transition-duration: 0.5s;
+  visibility: hidden;
+}
 </style>
 <html>
   <head>
@@ -237,19 +258,18 @@
     <div id="lib_panel" class="lib_panel">
       <h1> Library: </h1>
         {% for i in dbs.execute("SELECT * FROM games") %}
-          {% if str(i[0]) in dbs.execute("SELECT GAMES FROM users WHERE id="+str(session['user_id']))[0][0] %}
           <div class="div_themes">
             <button onclick="" oncl id="theme-libpanel" class="theme-button">
               {{i[1]}}
               <img class="img_themes" src="{{url_for('static', filename=i[2])}}">
             </button>
           </div>
-          {% endif %}
         {% endfor %}
         </div>
         <div id="themes_panel" class="themes_panel">
           <h1 style="text-align: center;"> Themes: </h1>
-          
+
+          <div class="themes_pos">
             {% for i in dbs.execute("SELECT * FROM themes") %}
               <div class="div_themes">
                 <button onclick="theme_swap({{i[0]}})" oncl id="theme-libpanel" class="theme-button">
@@ -257,14 +277,13 @@
                 </button>
               </div>
             {% endfor %}
-            <button onclick="refresh()" class="center btn">Refresh</button>
-
-        </div>
+            </div>
+            <button onclick="refresh()" class="refresh_pos">Refresh</button>
+          </div>
     {% endif %}
     <div id="embed" class="embed center">
     {% block embed %} {% endblock %}
     </div>
-  </div>
   
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> 
@@ -330,11 +349,8 @@
   
   swapImg(document.getElementById("a{{website_name}}"), "{{url_for('static', filename='images/logo.png')}}");
   {% if session["user_id"] %}
-  swapImg(document.getElementById("aprofile"), "{{url_for('static', filename='images/profiles/' + str(session['user_id']) + '.png')}}");
-  {% else %}
-  swapImg(document.getElementById("aprofile"), 
-    "{{url_for('static', filename=dbs.execute('SELECT val FROM dynamic WHERE var=\'defprof\''))}}");
-  
+  swapImg(document.getElementById("aprofile"), "{{url_for('static', filename=dbs.execute('SELECT profile FROM users WHERE id='+str(session['user_id']))[0][0])}}");  
+  console.log("{{dbs.execute('SELECT profile FROM users WHERE id='+str(session['user_id']))[0][0]}}");
   {% endif %}
   
   function myFunction() {
@@ -344,5 +360,5 @@
   </script>
   </body>
   </html>
-
-</style>
+  
+  
