@@ -5,27 +5,40 @@
 {% block embed %} 
 <div class="center profil_right">
 <form action="/profile" method="post" enctype=multipart/form-data>
-  <a class="center btu" href="/logout"> Log out </a>
+  <a class="btf" href="/logout"> Log out </a>
 </form>
-<form id="s_password"action="/profile" method="post" enctype=multipart/form-data>
-  <input type=password class="query center" name="npassword" placeholder="New Password"></input>
-  <input type=password class="query center" name="npassword-conf" placeholder="Confirm New Password"></input>
-  <input type=password class="query center" name="opassword" placeholder="Old Password"></input>
-  <button type=submit class="center submit btn"> Submit </button>
-
-  
+<button id="my_button1" class="s_but" onclick="myFunctionp()">Change password</button>
+<div id="s_password" class="s_password">
+<form action="/profile" method="post" enctype=multipart/form-data>
+  <input type=password class="query center s_space" name="npassword" placeholder="New Password"></input>
+  <input type=password class="query center s_space" name="npassword-conf" placeholder="Confirm New Password"></input>
+  <input type=password class="query center s_space" name="opassword" placeholder="Old Password"></input>
+  <button type=submit class="center submit btn"> Submit </button> <br>
 </form>
+<button id="s_return" class="s_return" onclick="function_return()">Return</button>
+  </div>
 
-<form id="s_username" action="/profile" method="post" enctype=multipart/form-data>
-<input type=text class="query center" name="nusername" placeholder="New Username"></input>
-<input type=password class="query center" name="opassword" placeholder="Password"></input>
+<br>
+
+<button id="my_button2" class="s_but" onclick="myFunctionq()">Change username</button>
+<div id="s_username"class="s_username">
+<form action="/profile" method="post" enctype=multipart/form-data>
+<input type=text class="query center s_space" name="nusername" placeholder="New Username"></input>
+<input type=password class="query center s_space" name="opassword" placeholder="Password"></input>
 <button type=submit class="center submit btn"> Submit </button>
+</form>
+<button id="s_return" class="s_return" onclick="function_return()">Return</button>
+</div>
 
-</from>
+<br>
 
-<form id="s_image" action="/profile" method="post" enctype=multipart/form-data>
+
+<button id="my_button3" class="s_but" onclick="myFunctiond()">Change avatar</button>
+<div id="s_image"class="s_image s_space">
+<form action="/profile" method="post" enctype=multipart/form-data>
 <input type=file class="query center" name=file placeholder="pfp"></input>
 <button type=submit class="center submit btn"> Submit </button>
-
 </form>
+<button id="s_return" class="s_return" onclick="function_return()">Return</button>
+</div>
 {% endblock %}
