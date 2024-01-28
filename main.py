@@ -124,7 +124,7 @@ def register():
     starters = dbs.execute("SELECT val FROM dynamic WHERE var='start_budget'")[0][0]
 
 
-    dbs.execute(f"INSERT INTO users (id, name, password, balance, profile, theme, games, cart) VALUES ({len(users)+1}, '{username}', '{hashd}', {starters}, 'images/profiles/default.png', 0, '', '')")
+    dbs.execute(f"INSERT INTO users (id, name, password, balance, profile, theme, games, cart) VALUES ({len(users)+1}, '{username}', '{hashd}', {starters}, 'images/profiles/default.svg', 0, '', '')")
     session["user_id"] = int(len(users)+1)
 
 
@@ -261,13 +261,11 @@ def profile():
 
     cur_passwd = dbs.execute(f"SELECT password FROM users WHERE id={session['user_id']}")[0][0]
 
-
-    if not check_password_hash(cur_passwd, old_passwd):
-      return apology('incorrect password', dbs=dbs)
-
     if new_passwd:
+      if not check_password_hash(cur_passwd, old_passwd):
+        return apology('incorrect password', dbs=dbs)
       if new_passwd != new_passwd_conf:
-        return apology('passwords dont match', dbs=dbs)
+         return apology('passwords dont match', dbs=dbs)
       dbs.execute(f"UPDATE users SET password='{generate_password_hash(new_passwd)}' WHERE id={session['user_id']}")
 
 
@@ -283,7 +281,7 @@ def profile():
         if file and allowed_file(file.filename):
           fname=str(session["user_id"]) + "." + file.filename.rsplit(".", 1)[1].lower()
           file.save(os.path.join(app.config["UPLOAD_FOLDER"], fname))
-          dbs.execute(f"UPDATE users SET profile='{os.path.join(app.config['UPLOAD_FOLDER'], fname)}' WHERE id={session['user_id']}")
+          dbs.execute(f"UPDATE users SET profile='images/profiles/{fname}' WHERE id={session['user_id']}")
 
     return redirect("/")
   else:
