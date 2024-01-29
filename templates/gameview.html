@@ -25,7 +25,7 @@
 <div>
 <h1>{{game[1]}}</h1>
 
-{% if str(game[0]) in dbs.execute("SELECT games FROM users WHERE id="+str(session['user_id'])) %}
+{% if not str(game[0]) in dbs.execute("SELECT games FROM users WHERE id="+str(session['user_id']))[0][0] %}
 
 <button>Price:{{game[-1]}}</button>
 <button onclick="cartAct({{game[0]}})">Add to Cart</button>
