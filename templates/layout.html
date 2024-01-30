@@ -49,7 +49,7 @@
   .panel {
     right: 0.7%;
     width: 100%;
-    height: 6%;
+    height: 7%;
     position: fixed;
     display: flex;
     background-color: rgb(79, 77, 77);
@@ -309,6 +309,14 @@
   font-size: medium;
   left: 20%;
 }
+.profile_img 
+{
+  position: relative;
+  max-width: 22%;
+  bottom: 25%;
+  height: 110%;
+  bottom: 20px;
+}
 </style>
 <html>
   <head>
@@ -417,7 +425,7 @@
     addPanelElement("library", "Library", "panel", "library");
   
   
-    addPanelElement("profile", "profile", "panel", "profile", true);
+    addPanelElement("profile", "profile", "panel", "profile_img", true);
   {% endif %}
   
   function swapImg(obj, src, add) {
@@ -426,10 +434,16 @@
     obj.appendChild(img);
     img.className="header_img";
   }
+  function swapImg2(obj, src, add) {
+    img = document.createElement("img");
+    img.src=src;
+    obj.appendChild(img);
+    img.className="profile_img";
+  }
   
   swapImg(document.getElementById("a{{website_name}}"), "{{url_for('static', filename='images/logo.png')}}");
   {% if session["user_id"] %}
-  swapImg(document.getElementById("aprofile"), "{{url_for('static', filename=dbs.execute('SELECT profile FROM users WHERE id='+str(session['user_id']))[0][0])}}");  
+  swapImg2(document.getElementById("aprofile"), "{{url_for('static', filename=dbs.execute('SELECT profile FROM users WHERE id='+str(session['user_id']))[0][0])}}");  
   console.log("{{dbs.execute('SELECT profile FROM users WHERE id='+str(session['user_id']))[0][0]}}");
   {% endif %}
   
