@@ -1,7 +1,7 @@
 # TODO!
 ## Graphics:
 * icon - done i think
-* default user profile - done, in the process of styling it because my progress got lost somwhere
+* default user profile - done
 ## Backend:
 * helpers (require login - wraps, apology)
 * browse
