@@ -130,7 +130,7 @@
   .header_img {
     position: relative;
     max-width: 22%;
-    bottom: 25%;
+    bottom: 40%;
   }
   .lib_panel {
     display: block;
@@ -313,10 +313,15 @@
 {
   position: relative;
   max-width: 22%;
-  bottom: 25%;
+  bottom: 30%;
   height: 110%;
-  bottom: 20px;
 }
+
+.about {
+  background-image: url("{{url_for('static', filename='images/about.svg')}}");
+
+}
+
 </style>
 <html>
   <head>
@@ -440,8 +445,19 @@
     obj.appendChild(img);
     img.className="profile_img";
   }
+
+  //function swapImgNR(obj, src, add) {
+  //  obj.style.backgroundImage="file:///"+src;
+  //  img.className="profile_img";
+  //}
   
-  swapImg(document.getElementById("a{{website_name}}"), "{{url_for('static', filename='images/logo.png')}}");
+  swapImg(document.getElementById("a{{website_name}}"), "{{url_for('static', filename='images/logo.svg')}}");
+//  swapImgNR(document.getElementById("About"), "{{url_for('static', filename='images/about.svg')}}");
+//  swapImgNR(document.getElementById("Browse"), "{{url_for('static', filename='images/browse.svg')}}");
+//  swapImgNR(document.getElementById("Cart"), "{{url_for('static', filename='images/cart.svg')}}");
+//  swapImgNR(document.getElementById("Library"), "{{url_for('static', filename='images/library.svg')}}");
+    
+
   {% if session["user_id"] %}
   swapImg2(document.getElementById("aprofile"), "{{url_for('static', filename=dbs.execute('SELECT profile FROM users WHERE id='+str(session['user_id']))[0][0])}}");  
   console.log("{{dbs.execute('SELECT profile FROM users WHERE id='+str(session['user_id']))[0][0]}}");

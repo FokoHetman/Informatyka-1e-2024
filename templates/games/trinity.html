@@ -1,0 +1,23 @@
+{% extends "layout.html" %}
+
+
+{% block title %}
+{{game[1]}}
+
+{% endblock %}
+
+
+{% block embed %}
+
+<div class="textblock">
+
+Hello there!
+<br>
+This is a test game for this project.
+<br>
+So yeah, feel free to <a href="{{url_for('static', filename='doom.zip')}}"> Download Doom </a>
+<br>
+Remember. We just distribute games, we not sure if game=malware or not :D
+</div>
+
+{% endblock %}

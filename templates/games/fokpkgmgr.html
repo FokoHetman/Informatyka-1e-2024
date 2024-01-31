@@ -1,0 +1,30 @@
+{% extends "layout.html" %}
+
+
+{% block title %}
+{{game[1]}}
+
+{% endblock %}
+
+{% block embed %}
+<div class="textblock center">
+Hello, {{dbs.execute("SELECT name FROM users WHERE id="+str(session['user_id']))[0][0]}}!<br>
+<br>This is my (Foko's) another private project, <a href="https://github.com/FokoHetman/Furballs">Fok's Package Manager For Linux</a>.<br>
+Server of that project is a simple file handler, containing:
+<li> "core", "debugger" and "fok" -> core files that are updates using "sealy"
+<li> "core/packages" -> packages that are installed using "fok".
+<br><br>
+The client is made out of 2 main parts. "sealy" -> main part of the package manager.<br>
+"Sealy" is a tool to upgrade and hold everything in place. "Fok", the second part, <br>
+is supposed to handle packages (such as neofetch and other packages). There are 3 sub-parts.<br>
+<li> core - this is where "sources" ("fok"'s instructions, such as install or update) and "packages" are stored.
+<li> debugger - a debugging piece used to check installation's health and such. It's also used to check if new "fok" version is backward compatible.
+<li> pretend - virtual environment to check integrity of upgraded "core" packages, to make sure nothing broke mid-install.
+<br><br>
+All that composes into a package manager.
+<br>
+
+You can download it on my <a href="https://github.com/FokoHetman">GitHub</a> or directly,
+<a href="{{url_for('static', filename='apps/sealy.rs')}}"> here </a>. <br> Thanks!
+
+{% endblock %}
