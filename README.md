@@ -3,17 +3,17 @@
 * icon - done i think
 * default user profile - done
 ## Backend:
-* helpers (require login - wraps, apology)
+* helpers (require login - wraps, apology) - done
 * browse
 * wallet
 * theme handler - done
 * games system:
 * * listing - done
   * browse
-  * library
-  * buying
-  * more games
-* basket
+  * library  - done
+  * buying  - done
+  * more games   - done
+* cart  - done
 * pfp managment (you somehow fucked that up - done
 ## Others:
 * styling - done
