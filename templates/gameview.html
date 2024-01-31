@@ -33,7 +33,7 @@
 </div>
 {% else %}
 
-<button> Play </button>
+<button onclick="play({{game[0]}})"> Play </button>
 
 {% endif %}
 {{game[3]}}
@@ -49,6 +49,9 @@
     
     function buy(id) {
         location.href = "buy?id="+id;
+    }
+    function play(id) {
+        location.href = "play?id="+id;
     }
     </script>
 {% endblock %}

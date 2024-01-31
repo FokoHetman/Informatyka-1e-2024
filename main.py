@@ -25,6 +25,29 @@ Session(app)
 
 '''ROUTES'''
 
+
+
+'''GAME HANDLER'''
+@app.route("/play")
+def play():
+  id = requests.args["id"]
+
+  if id:
+    gamedata = dbs.execute("SELECT * FROM gamedata WHERE id="+id)
+
+    return gamedata
+  return apology("id not found..")
+
+
+
+
+
+
+
+
+
+
+
 @app.route("/about", methods=["GET"])
 def about():
   name = dbs.execute("SELECT val FROM dynamic WHERE var='site_name'")[0][0]
@@ -242,8 +265,7 @@ def buy():
 '''USER CUSTOMISATION'''
 
 def allowed_file(filename):
-    return '.' in filename and \
-           filename.rsplit('.', 1)[1].lower() == "png"
+    return '.' in filename
 
 
 
@@ -277,8 +299,8 @@ def profile():
       file = request.files['file']
 
       if not file.filename=='':
-        print(file, allowed_file(file.filename))
-        if file and allowed_file(file.filename):
+
+        if file and "." in file.filename:
           fname=str(session["user_id"]) + "." + file.filename.rsplit(".", 1)[1].lower()
           file.save(os.path.join(app.config["UPLOAD_FOLDER"], fname))
           dbs.execute(f"UPDATE users SET profile='images/profiles/{fname}' WHERE id={session['user_id']}")
