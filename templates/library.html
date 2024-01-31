@@ -1,14 +1,50 @@
+<style>
+    .browse-table {
+        position: relative;
+        height: 100%;
+        margin: auto;
+        display: block;
+    }
+
+    .browse-game-button {
+        background-color: rgba(25, 25, 25, 0.2);
+        position: relative;
+        width: 100%;
+        height: 100%;
+        margin: auto;
+        display: block;
+        transition: 0.2s;
+    }
+
+    .browse-game-button:hover {
+        transform: scale(1.1);
+    }
+
+    .div_game {
+      margin: 2% 2% 0% 0%;
+      box-sizing: border-box;
+      float: left;
+      width: 46%;
+      height: 18%;
+      position: relative;
+
+
+    }
+</style>
+
+
+
 {% extends "layout.html" %}
 
 {% block title %} {{website_name}} {% endblock %}
 
 {% block embed %}
-
-<div class="center textblock full">
+<div class="center textblock">
+<div class="center browse-table">
 {% for i in dbs.execute("SELECT * FROM games") %}
 {% if str(i[0]) in dbs.execute("SELECT GAMES FROM users WHERE id="+str(session['user_id']))[0][0] %}
-          <div class="div_themes">
-            <button onclick="getGame({{i[0]}})" oncl id="browse-game-button" class="browse-game-button">
+          <div class="div_game">
+            <button onclick="getGame({{i[0]}})" id="browse-game-button" class="browse-game-button">
                 {{i[1]}}
                 <img class="img_themes" src="{{url_for('static', filename=i[2])}}">
             </button>
@@ -17,7 +53,7 @@
 
 {% endfor %}
 </div>
-
+</div>
 <script>
 
   function getGame(id) {
@@ -28,3 +64,4 @@
   </script>
   
 {% endblock %}
+

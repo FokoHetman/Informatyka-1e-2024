@@ -1,0 +1,19 @@
+{% extends "layout.html" %}
+
+
+{% block title %}
+{{game[1]}}
+
+{% endblock %}
+
+{% block embed %}
+<div class="textblock center">
+Hello, {{dbs.execute("SELECT name FROM users WHERE id="+str(session['user_id']))[0][0]}}!<br>
+This is my (Foko's) private project, <a href="https://github.com/FokoHetman/Furballs">Furballs</a>.<br>
+It's a simple compression mechanism written in rust, that takes a folder/directory, fetches list of directories<br>
+and files. Using special headers, it changes a filesystem's folders into UTF-8 TEXT,<br>
+readable by a human.<br><br>
+You can download it on my <a href="https://github.com/FokoHetman">GitHub</a> or directly,
+<a href="{{url_for('static', filename='apps/furballs.rs')}}"> here </a>. <br> Thanks!
+
+{% endblock %}

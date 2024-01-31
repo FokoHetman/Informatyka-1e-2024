@@ -5,11 +5,20 @@
         position: relative;
     }
     .game {
-        display: inline;
+        display: block;
     }
     .title {
         display: inline;
         width: 10%;
+    }
+    .pricebtn {
+      width: 10%;
+      border-radius: 5px;
+      background-color: rgba(100, 100, 100, 0.5);
+    }
+    .abtn {
+      float: right;
+      width: 60%;
     }
 </style>
 
@@ -27,18 +36,16 @@
 
 {% if not str(game[0]) in dbs.execute("SELECT games FROM users WHERE id="+str(session['user_id']))[0][0] %}
 
-<button>Price:{{game[-1]}}</button>
-<button onclick="cartAct({{game[0]}})">Add to Cart</button>
-<button onclick="buy({{game[0]}})">Buy</button>
+<button class="pricebtn abtn">Price:{{game[-1]}}</button>
+<button class="btn abtn" onclick="cartAct({{game[0]}})">Add to Cart</button>
+<button class="btn abtn" onclick="buy({{game[0]}})">Buy</button>
 </div>
 {% else %}
 
-<button onclick="play({{game[0]}})"> Play </button>
+<button class="btn" onclick="play({{game[0]}})"> Play </button>
 
 {% endif %}
-{{game[3]}}
-
-{{game}}
+<br><h3>Description:</h3><br>{{game[3]}}
 
 </div>
 </div>

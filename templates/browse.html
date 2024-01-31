@@ -1,11 +1,34 @@
 <style>
     .browse-table {
-        background-color: rgb(200, 200, 200);
-
+        position: relative;
+        height: 100%;
+        margin: auto;
+        display: block;
     }
+
     .browse-game-button {
+        background-color: rgba(25, 25, 25, 0.2);
+        position: relative;
         width: 100%;
-        height: 20%;
+        height: 100%;
+        margin: auto;
+        display: block;
+        transition: 0.2s;
+    }
+
+    .browse-game-button:hover {
+        transform: scale(1.1);
+    }
+
+    .div_game {
+      margin: 2% 2% 0% 0%;
+      box-sizing: border-box;
+      float: left;
+      width: 46%;
+      height: 18%;
+      position: relative;
+
+
     }
 </style>
 
@@ -20,7 +43,7 @@
 <div class="center textblock">
 <div class="center browse-table">
 {% for i in dbs.execute("SELECT * FROM games") %}
-<div class="div_themes">
+<div class="div_game">
     <button onclick="getGame({{i[0]}})" oncl id="browse-game-button" class="browse-game-button">
         {{i[1]}}
         <img class="img_themes" src="{{url_for('static', filename=i[2])}}">

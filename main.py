@@ -30,12 +30,12 @@ Session(app)
 '''GAME HANDLER'''
 @app.route("/play")
 def play():
-  id = requests.args["id"]
-
+  id = request.args["id"]
+  name = dbs.execute("SELECT val FROM dynamic WHERE var='site_name'")[0][0]
   if id:
-    gamedata = dbs.execute("SELECT * FROM gamedata WHERE id="+id)
+    gamedata = dbs.execute("SELECT * FROM gamedata WHERE id="+str(id))[0]
 
-    return gamedata
+    return render_template("games/"+gamedata[1], dbs=dbs, str=str, website_name=name, library=False, game=dbs.execute("SELECT * FROM games WHERE id="+str(id))[0])
   return apology("id not found..")
 
 
