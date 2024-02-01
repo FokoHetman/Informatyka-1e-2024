@@ -127,17 +127,11 @@
     padding: 0.5%;
     text-align: center;
   }
-  .header_img 
-{
+  .header_img {
     position: relative;
-  max-width: 22%;
-  bottom: 30%;
-  height: 110%;
-}
-    /*position: relative;
     max-width: 22%;
-    bottom: 40%;*/
-  
+    bottom: 40%;
+  }
   .lib_panel {
     display: block;
     position: fixed;
@@ -300,7 +294,7 @@
   top: 15%;
 }
 .s_username{
-    visibility:hidden;
+  visibility:hidden;
     position: absolute;
     width: 100%;
     height: auto;
@@ -326,31 +320,6 @@
 .about {
   background-image: url("{{url_for('static', filename='images/about.svg')}}");
 
-}
-
-.center_txtblock
-{
-    background-color: rgba(75, 75, 75, 0.6);
-    color: white;
-    border: 2px solid black;
-    border-radius: 55px;
-    padding: 25px;
-    width: 85%;
-    font-size: 120%;
-    position: absolute;
-    margin: auto;
-    text-align: center;
-}
-
-.communityoradorsomethingwedidntsettlethatyet
-
-{
-    display: block;
-    height: 70%;
-    width: 15%;
-    left: 70px;
-    top: 55px;
-    
 }
 
 </style>
@@ -483,6 +452,7 @@
   //}
   
   swapImg(document.getElementById("a{{website_name}}"), "{{url_for('static', filename='images/logo.svg')}}");
+//  swapImg(document.getElementById("wallet"), "{{url_for('static', filename='images/wallet.svg')}}");
 //  swapImgNR(document.getElementById("About"), "{{url_for('static', filename='images/about.svg')}}");
 //  swapImgNR(document.getElementById("Browse"), "{{url_for('static', filename='images/browse.svg')}}");
 //  swapImgNR(document.getElementById("Cart"), "{{url_for('static', filename='images/cart.svg')}}");

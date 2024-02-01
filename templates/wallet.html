@@ -1,0 +1,19 @@
+{% extends "layout.html" %}
+
+{% block title %} {{website_name}} {% endblock %}
+
+{% block embed %}
+
+<div class="center textblock">
+{% if session["user_id"] %}
+<h1> Hello, {{dbs.execute("SELECT name FROM users WHERE id=" + str(session['user_id']))[0][0]}}! </h1>
+{% else %}
+<h1> Hello!</h1>
+{% endif %}
+
+
+<h3>Looking to power up your account?</h3><br>
+<button> Charge in xyz </button>
+
+
+{% endblock %}
