@@ -1,25 +1,27 @@
 {% extends "layout.html" %}
 
 <style>
-    .gameimg {
-        position: relative;
-    }
-    .game {
-        display: block;
-    }
-    .title {
-        display: inline;
-        width: 10%;
-    }
-    .pricebtn {
-      width: 10%;
-      border-radius: 5px;
-      background-color: rgba(100, 100, 100, 0.5);
-    }
-    .abtn {
-      float: right;
-      width: 60%;
-    }
+    
+.game 
+{
+    display: block;
+}
+    .title 
+{
+    display: inline;
+    width: 10%;
+}
+    .pricebtn 
+{
+    width: 10%;
+    border-radius: 5px;
+    background-color: rgba(100, 100, 100, 0.5);
+}
+    .abtn 
+{
+    float: right;
+    width: 60%;
+}
 </style>
 
 
@@ -27,7 +29,7 @@
 
 {% block embed %}
 
-<div class="center textblock">
+<div class="center_txtblock">
 <div class="game">
 
 <img src="{{url_for('static', filename=game[2])}}">
