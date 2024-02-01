@@ -34,6 +34,7 @@
 <img src="{{url_for('static', filename=game[2])}}">
 <div>
 <h1>{{game[1]}}</h1>
+{% if session["user_id"] %}
 {% if not str(game[0]) in dbs.execute("SELECT games FROM users WHERE id="+str(session['user_id']))[0][0] %}
 <button class="pricebtn abtn">Price:{{game[-1]}}</button>
 <button class="btn abtn" onclick="cartAct({{game[0]}})">Add to Cart</button>
@@ -41,6 +42,9 @@
 </div>
 {% else %}
 <button class="btn" onclick="play({{game[0]}})"> Play </button>
+{% endif %}
+{% else %}
+<button class="btn" onclick="login()"> Login </button>
 {% endif %}
 <br><h3>Description:</h3><br>{{game[3]}}
 </div>
@@ -55,6 +59,9 @@
     }
     function play(id) {
         location.href = "play?id="+id;
+    }
+    function login() {
+        location.href = "login";
     }
     </script>
 {% endblock %}
