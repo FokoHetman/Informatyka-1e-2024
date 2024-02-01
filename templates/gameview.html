@@ -1,7 +1,26 @@
 {% extends "layout.html" %}
 
 <style>
-    
+    .gameimg {
+        position: relative;
+    }
+    .game {
+        display: block;
+    }
+    .title {
+        display: inline;
+        width: 10%;
+    }
+    .pricebtn {
+      width: 10%;
+      border-radius: 5px;
+      background-color: rgba(100, 100, 100, 0.5);
+    }
+    .abtn {
+      float: right;
+      width: 60%;
+    }
+
 .game 
 {
     display: block;
@@ -29,26 +48,22 @@
 
 {% block embed %}
 
+<div class="center textblock">
 <div class="center_txtblock">
 <div class="game">
 
 <img src="{{url_for('static', filename=game[2])}}">
 <div>
 <h1>{{game[1]}}</h1>
-
 {% if not str(game[0]) in dbs.execute("SELECT games FROM users WHERE id="+str(session['user_id']))[0][0] %}
-
 <button class="pricebtn abtn">Price:{{game[-1]}}</button>
 <button class="btn abtn" onclick="cartAct({{game[0]}})">Add to Cart</button>
 <button class="btn abtn" onclick="buy({{game[0]}})">Buy</button>
 </div>
 {% else %}
-
 <button class="btn" onclick="play({{game[0]}})"> Play </button>
-
 {% endif %}
 <br><h3>Description:</h3><br>{{game[3]}}
-
 </div>
 </div>
 <script>
@@ -64,4 +79,3 @@
     }
     </script>
 {% endblock %}
-
