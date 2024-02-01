@@ -127,7 +127,6 @@
     padding: 0.5%;
     text-align: center;
   }
-  .header_img {
   .header_img 
 {
     position: relative;
@@ -137,10 +136,8 @@
 }
     /*position: relative;
     max-width: 22%;
-    bottom: 40%;
-  }
     bottom: 40%;*/
-
+  
   .lib_panel {
     display: block;
     position: fixed;
@@ -303,7 +300,6 @@
   top: 15%;
 }
 .s_username{
-  visibility:hidden;
     visibility:hidden;
     position: absolute;
     width: 100%;
@@ -326,6 +322,7 @@
   bottom: 30%;
   height: 110%;
 }
+
 .about {
   background-image: url("{{url_for('static', filename='images/about.svg')}}");
 
@@ -353,13 +350,15 @@
     width: 15%;
     left: 70px;
     top: 55px;
-
+    
 }
 
 </style>
 <html>
   <head>
+
     <title> {% block title %} {% endblock %}</title>
+
     <meta name="viewport" content="width=device-width, initial-scale=1">
   </head>
   <body>
@@ -393,6 +392,7 @@
         </div>
         <div id="themes_panel" class="themes_panel">
           <h1 style="text-align: center;"> Themes: </h1>
+
           <div class="themes_pos">
             {% for i in dbs.execute("SELECT * FROM themes") %}
               <div class="div_themes">
@@ -409,8 +409,10 @@
     {% block embed %} {% endblock %}
     </div>
   
+
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> 
   <script>
+
   function theme_swap(id) {
     $.post( "/changetheme", {
       javascript_data: id
@@ -474,6 +476,7 @@
     obj.appendChild(img);
     img.className="profile_img";
   }
+
   //function swapImgNR(obj, src, add) {
   //  obj.style.backgroundImage="file:///"+src;
   //  img.className="profile_img";
@@ -485,6 +488,7 @@
 //  swapImgNR(document.getElementById("Cart"), "{{url_for('static', filename='images/cart.svg')}}");
 //  swapImgNR(document.getElementById("Library"), "{{url_for('static', filename='images/library.svg')}}");
     
+
   {% if session["user_id"] %}
   swapImg2(document.getElementById("aprofile"), "{{url_for('static', filename=dbs.execute('SELECT profile FROM users WHERE id='+str(session['user_id']))[0][0])}}");  
   console.log("{{dbs.execute('SELECT profile FROM users WHERE id='+str(session['user_id']))[0][0]}}");
@@ -519,4 +523,5 @@
   </script>
   </body>
   </html>
+  
   

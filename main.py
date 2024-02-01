@@ -42,10 +42,7 @@ def play():
 
 
 
-@app.route("/wallet", methods=["GET", "POST"])
-def wallet():
-  name = dbs.execute("SELECT val FROM dynamic WHERE var='site_name'")[0][0]
-  return render_template("wallet.html", website_name=name, dbs=dbs, str=str, library=True)
+
 
 
 
