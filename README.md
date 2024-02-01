@@ -18,10 +18,10 @@
 ## Others:
 * styling - done
 * more styling
-* static background (fixed) - pending
+* static background (fixed) - ye
 * even more styling
 * :D
-* implement games & apps
+* implement games & apps - done
 
 
 
