@@ -1,29 +1,11 @@
 # TODO!
-## Graphics:
-* icon - done i think
-* default user profile - done
 ## Backend:
-* helpers (require login - wraps, apology) - done
-* browse
-* wallet
-* theme handler - done
-* games system:
-* * listing - done
-  * browse
-  * library  - done
-  * buying  - done
-  * more games   - done
-* cart  - done
-* pfp managment (you somehow fucked that up - done
+* game searching in browse and library
 ## Others:
-* styling - done
 * more styling
-* static background (fixed) - pending
 * even more styling
 * :D
 * implement games & apps
-
-
 
 
 
