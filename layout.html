@@ -380,49 +380,52 @@
 
 .money
 {
+    content: "xxxx";
 	position: fixed;
  	width: 3%;
- 	height: 7px;
+ 	height: 5px;
 	right: 153px;
-	top: 90px;
+	top: 75px;
 	padding: 10px;
 	background-color: #3ed918;
 	border: 2px #FFFFFF;
-}
-
-.poziomplus
-{
-	position: relative;
-	width: 100%;
-	height: 10%;
-	left: 0%;
-	top: 50%;
-	background-color: #FFFFFF;
-}
-
-.pionplus
-{
-	position: relative;
-	height: 100%;
-	width: 10%;
-	top: 0%;
-	left: 50%;
-	background-color: #FFFFFF;
+    opacity: 0.5;
 }
 
 .wallet
 {
-	position: fixed;
- 	width: 18px;
- 	height: 7px;
-	right: 100px;
-	top: 90px;
-	padding: 10px;
-	background-color: #3ed918;
+  position: absolute;
+  right: 130px;
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  background-color: rgb(44,108,128);
+  bottom: 850px;
+  left: 1730px;
 }
+
+.horizontal-plus {
+  position: relative;
+  background-color: #FFFFFF;
+  width: 50%;
+  height: 12.5%;
+  left: 25%;
+  top: 43.75%;
+}
+.vertical-plus {
+  position: relative;
+  background-color: #FFFFFF;
+  width: 12.5%;
+  height: 50%;
+  left: 43.75%;
+  top: 12.5%;
+}
+
 .wallet:hover
 { 
 	cursor: pointer;
+    transform: scale(1.2);
+    opacity: 1;
 }
 
 </style>
@@ -442,9 +445,10 @@
           </div>
            <div id="panel" class="panel center">
             </div>
-             <div class="money">
-  	      </div>
-  	       <div class="wallet">
+             <div class="money"></div>
+  	      <div class="wallet">
+  <div class='horizontal-plus'></div>
+  <div class='vertical-plus'></div>
  		</div>
     {% else %}
       <div class="lay">
