@@ -1,5 +1,5 @@
 #FOK COOKIN'
-from flask import Flask, request, render_template, redirect, session, url_for
+from flask import Flask, request, render_template, redirect, session, url_for, send_from_directory
 from databases.handler import Handler
 from helpers import apology, login_required
 import os
@@ -21,10 +21,14 @@ app.config["UPLOAD_FOLDER"] = "static/images/profiles"
 Session(app)
 
 
+'''YES'''
+@app.route('/favicon.ico')
+def favicon():
+    return send_from_directory('static/', 'favicon.ico', mimetype='image/vnd.microsoft.icon')
+
 
 
 '''ROUTES'''
-
 
 
 '''GAME HANDLER'''
@@ -40,6 +44,23 @@ def play():
 
 
 
+
+
+
+@app.route("/wallet", methods=["GET", "POST"])
+@login_required
+def wallet():
+  name = dbs.execute("SELECT val FROM dynamic WHERE var='site_name'")[0][0]
+  if request.method=="POST":
+
+    new_amount = request.values["money"]
+
+    old_amount = dbs.execute("SELECT balance FROM users WHERE id="+str(session["user_id"]))[0][0]
+    dbs.execute("UPDATE users SET balance="+str(int(old_amount)+int(new_amount))+" WHERE id="+str(session["user_id"]))
+
+    return render_template("transsuccess.html", dbs=dbs, str=str, library=True, website_name=name, amount=new_amount)
+  else:
+    return render_template("wallet.html", dbs=dbs, str=str, library=True, website_name=name)
 
 
 
