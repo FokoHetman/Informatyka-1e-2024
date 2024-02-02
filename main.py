@@ -58,7 +58,7 @@ def wallet():
     old_amount = dbs.execute("SELECT balance FROM users WHERE id="+str(session["user_id"]))[0][0]
     dbs.execute("UPDATE users SET balance="+str(int(old_amount)+int(new_amount))+" WHERE id="+str(session["user_id"]))
 
-    return render_template("transsuccess.html", dbs=dbs, str=str, library=True, website_name=name, amount=new_amount)
+    return render_template("transsuccess.html", dbs=dbs, str=str, library=True, website_name=name, item=str(new_amount)+"$")
   else:
     return render_template("wallet.html", dbs=dbs, str=str, library=True, website_name=name)
 
