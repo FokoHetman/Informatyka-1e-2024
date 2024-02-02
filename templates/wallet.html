@@ -11,9 +11,12 @@
 <h1> Hello!</h1>
 {% endif %}
 
+<form action="/wallet" method="POST">
+<h2>Szukasz sposobu na doładowanie swego konta?</h2><br>
+<h3>Wybierz ilość pięniędzy do dodania!</h3><br>
 
-<h3>Looking to power up your account?</h3><br>
-<button> Charge in xyz </button>
-
+<input autocomplete="off" class="form-control" min="0" step="10" name="money" id="money" value=100 placeholder=100 type="number">
+<button name="submit" class="btn" type=submit> Dodaj! </button>
+</form>
 
 {% endblock %}
