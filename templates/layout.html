@@ -461,7 +461,7 @@
     <div id="lib_panel" class="lib_panel">
       <h1> Library: </h1>
         {% for i in dbs.execute("SELECT * FROM games") %}
-          {% if str(i[0]) in dbs.execute("SELECT games FROM users WHERE id="+str(session['user_id'])) %}
+          {% if str(i[0]) in dbs.execute("SELECT games FROM users WHERE id="+str(session['user_id']))[0][0] %}
           <div class="div_themes">
             <button onclick="" oncl id="theme-libpanel" class="theme-button">
               {{i[1]}}
@@ -470,21 +470,21 @@
           </div>
           {% endif %}
         {% endfor %}
-        </div>
-        <div id="themes_panel" class="themes_panel">
-          <h1 style="text-align: center;"> Themes: </h1>
+    </div>
+    <div id="themes_panel" class="themes_panel">
+        <h1 style="text-align: center;"> Themes: </h1>
 
-          <div class="themes_pos">
+        <div class="themes_pos">
             {% for i in dbs.execute("SELECT * FROM themes") %}
-              <div class="div_themes">
+            <div class="div_themes">
                 <button onclick="theme_swap({{i[0]}})" oncl id="theme-libpanel" class="theme-button">
                     <img class="img_themes" src="{{url_for('static', filename=i[2])}}">
                 </button>
-              </div>
-            {% endfor %}
             </div>
-            <button onclick="refresh()" class="refresh_pos">Refresh</button>
-          </div>
+            {% endfor %}
+        </div>
+        <button onclick="refresh()" class="refresh_pos">Refresh</button>
+    </div>
     {% endif %}
     <div id="embed" class="embed center">
     {% block embed %} {% endblock %}
