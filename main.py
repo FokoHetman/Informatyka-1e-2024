@@ -281,7 +281,7 @@ def buy():
   ngames = dbs.execute("SELECT games FROM users WHERE id="+str(session['user_id']))[0][0] + str(id)
 
   dbs.execute(f"UPDATE users SET balance={new_bal}, games='{ngames}' WHERE id="+str(session['user_id']))
-  return render_template("transsucess.html", dbs=dbs, str=str, item=dbs.execute("SELECT name FROM games WHERE id="+str(id)))
+  return render_template("transsuccess.html", dbs=dbs, str=str, item=dbs.execute("SELECT name FROM games WHERE id="+str(id)))
 
 '''USER CUSTOMISATION'''
 
