@@ -1,3 +1,4 @@
+//MERGE!!!!
 <style>
   @media (min-width:320px)  { 
     /* smartphones, portrait iPhone, portrait 480x320 phones (Android) */
@@ -378,6 +379,56 @@
     
 }
 
+.money
+{
+    content: "xxxx";
+	position: fixed;
+ 	width: 3%;
+ 	height: 5px;
+	right: 153px;
+	top: 75px;
+	padding: 10px;
+	background-color: #3ed918;
+	border: 2px #FFFFFF;
+    opacity: 0.5;
+}
+
+.wallet
+{
+  position: absolute;
+  right: 130px;
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  background-color: rgb(44,108,128);
+  bottom: 850px;
+  left: 1730px;
+}
+
+.horizontal-plus {
+  position: relative;
+  background-color: #FFFFFF;
+  width: 50%;
+  height: 12.5%;
+  left: 25%;
+  top: 43.75%;
+}
+.vertical-plus {
+  position: relative;
+  background-color: #FFFFFF;
+  width: 12.5%;
+  height: 50%;
+  left: 43.75%;
+  top: 12.5%;
+}
+
+.wallet:hover
+{ 
+	cursor: pointer;
+    transform: scale(1.2);
+    opacity: 1;
+}
+
 </style>
 <html>
   <head>
@@ -391,10 +442,15 @@
   
   
     {% if session["user_id"] %}
-        <div class="lay">
-          <div id="panel" class="panel center">
+         <div class="lay">
           </div>
-          </div>
+           <div id="panel" class="panel center">
+            </div>
+             <div class="money"></div>
+  	      <div class="wallet">
+  <div class='horizontal-plus'></div>
+  <div class='vertical-plus'></div>
+ 		</div>
     {% else %}
       <div class="lay">
         <div id="panel2" class="panel center">
@@ -433,7 +489,7 @@
     <div id="embed" class="embed center">
     {% block embed %} {% endblock %}
     </div>
-  
+ 
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> 
   <script>
