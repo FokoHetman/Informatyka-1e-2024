@@ -109,7 +109,13 @@
     background: radial-gradient(rgb(3, 212, 3),green);
     width: 40%;
     margin-top: 3.5%;
+    transition: 1s;
   }
+  
+  .btn:hover {
+    transform: scale(1.15);
+  }
+
   .btu {
     border: 2px solid black;
     border-radius: 10px;
@@ -488,11 +494,9 @@
     <div id="embed" class="embed center">
     {% block embed %} {% endblock %}
     </div>
- <div class="money"><p1> 100pln </p1></div>
-  	      <div class="wallet">
-  <div class='horizontal-plus'></div>
-  <div class='vertical-plus'></div>
- 		</div>
+
+     <div class="money"><p1> <button class="btn" style="width: 100%;" onclick="">{{dbs.execute("SELECT balance FROM users WHERE id="+str(session['user_id']))[0][0]}}PLN</button> </p1></div>
+
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> 
   <script>
