@@ -495,7 +495,10 @@
     {% block embed %} {% endblock %}
     </div>
 
-     <div class="money"><p1> <button class="btn" style="width: 100%;" onclick="">{{dbs.execute("SELECT balance FROM users WHERE id="+str(session['user_id']))[0][0]}}PLN</button> </p1></div>
+     {%if session["user_id"]%}
+     <div class="money"><p1> <button class="btn" style="width: 100%;" onclick="">
+      {{dbs.execute("SELECT balance FROM users WHERE id="+str(session['user_id']))[0][0]}}PLN</button> </p1></div>
+{%endif%}
 
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> 
