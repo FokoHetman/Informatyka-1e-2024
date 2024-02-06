@@ -46,7 +46,9 @@
 
 
 <div class="center textblock">
-<div class="center browse-table"><h1>Koszyk</h1>
+<div class="center browse-table">
+<h1>{{lang['cart.title']}}</h1>
+
 {% for i in dbs.execute("SELECT * FROM games") %}
 {% if str(i[0]) in dbs.execute("SELECT cart FROM users WHERE id="+str(session['user_id']))[0][0] %}
 

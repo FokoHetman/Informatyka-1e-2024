@@ -2,7 +2,48 @@
   "cart.title": "Cart",
   "browse.title": "Browse",
   "library.title": "Library",
-  "about.title": "About"
+  "about.title": "About",
+  "about.wallotext": "This is a project, that is supposed to look and work like game stores, such as steam or epic games. Let's start with the authors: Bartek, Patryk, Jakub and Robert. Project was an idea proposed by foko found by mixing ideas of others, expanded and 'upgraded' by other group members.",
+  "about.welcome": "Welcome to ",
+  "about.hello": "Hello",
+  "about.bartek": "Bartek: creator of icons and such - frontend,",
+  "about.jakub": "Jakub: main frontend dev - css and some parts of backend,",
+  "about.robert": "Robert: secondary frontend dev, parts of css,",
+  "about.patryk": "Patryk: Maintainer of 'skeleton' of that site. Main backend dev.",
+  "about.authors": "Authors: ",
 
+  "doom.desc": "Classic Ol' Doom Demo I downloaded from sketchiest site possible.",
+  "polish.desc": "Polish Nail simulator",
+  "furball.desc": "A simple way of compressing things. Made in rust.",
+  "fokpkgmgr.desc": "A simple package manager for GNU/Linux OS made in rust.",
+  "gta.desc": "Cheap clone of gta, not implemented",
+  "watermelon.desc": "A CAT eating A WATERMELON for 6 MINUTES STRAIGHT. LETS GO!",
+  "watermelon.gamedesc": "Watch a cat eat a watermelon slice for 5 minutes and 43 seconds!",
+
+  "hoi5.desc": "A new version of HOI4 game! Play Civil War II DLC just for 19 more PLN!",
+
+
+  "wallet.q1": "Are ya looking for a way to get some cash?",
+  "wallet.q2": "Pick an amount and cash it in!",
+  "wallet.submit": "Cash in",
+
+  "profile.forgor": "I forgot my password",
+  "profile.problem": "Not our problem mate!",
+
+  "transaction.items": "Successfully added to your account: ",
+  "transaction.thanks": "Thanks for using our service!",
+
+  "common.username": "Username",
+  "common.password": "Password",
+  "common.new": "New",
+  "common.submit": "Submit",
+  "common.noimpl": "No Implementation",
+  "common.success": "Success",
+
+  "error.lackcash": "You don't have enough cash!",
+  "error.incpasswd": "Incorrect Password!",
+  "error.passwdnomatch": "Passwords don't match!",
+  "error.inclogin": "Username or Password is incorrect!",
+  "error.taken": "Username is already taken!",
+  "error.owned": "You already own that game!"
 }
-
