@@ -16,7 +16,15 @@
 
     <button name="submit" class="submit btn ">Submit</button><br>
   </form>
+
   <button id="my_button" style="background: transparent;border: none; color:rgb(217, 3, 3); font-weight: bold; "onclick="myFunction()">I don't remember password</button>
+
+
   <p id="demo" style="position: relative;top: -4vh;"></p>
 </div>
+<script>
+  function passwd() {
+    document.getElementById("my_button").innerText="not our problem!";
+  }
+</script>
 {% endblock %}
