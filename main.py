@@ -2,10 +2,33 @@
 from flask import Flask, request, render_template, redirect, session, url_for, send_from_directory
 from databases.handler import Handler
 from helpers import apology, login_required
-import os
+import os, json
 from werkzeug.security import check_password_hash, generate_password_hash
 from werkzeug.utils import secure_filename
 from flask_session import Session
+
+
+
+
+
+'''LANGAUGES'''
+langs = ["en_US"] #, "pl_PL"]
+translate = {}
+
+for i in langs:
+  with open("static/lang/"+i+".json", "r+") as f:
+    translate[i] = json.load(f)
+
+
+
+def getLang():
+  if session["user_id"]:
+    return translate[dbs.execute("SELECT lang FROM users WHERE id="+str(session["user_id"]))[0][0]]
+  else:
+    return translate["en_US"]
+
+
+
 
 
 ''' DATABASES'''
@@ -39,7 +62,7 @@ def play():
   if id:
     gamedata = dbs.execute("SELECT * FROM gamedata WHERE id="+str(id))[0]
 
-    return render_template("games/"+gamedata[1], dbs=dbs, str=str, website_name=name, library=False, game=dbs.execute("SELECT * FROM games WHERE id="+str(id))[0])
+    return render_template("games/"+gamedata[1], dbs=dbs, str=str, website_name=name, library=False, game=dbs.execute("SELECT * FROM games WHERE id="+str(id))[0], lang=getLang())
   return apology("id not found..")
 
 
@@ -58,9 +81,9 @@ def wallet():
     old_amount = dbs.execute("SELECT balance FROM users WHERE id="+str(session["user_id"]))[0][0]
     dbs.execute("UPDATE users SET balance="+str(int(old_amount)+int(new_amount))+" WHERE id="+str(session["user_id"]))
 
-    return render_template("transsuccess.html", dbs=dbs, str=str, library=True, website_name=name, item=str(new_amount)+"$")
+    return render_template("transsuccess.html", dbs=dbs, str=str, library=True, website_name=name, item=str(new_amount)+"$", lang=getLang())
   else:
-    return render_template("wallet.html", dbs=dbs, str=str, library=True, website_name=name)
+    return render_template("wallet.html", dbs=dbs, str=str, library=True, website_name=name, lang=getLang())
 
 
 
@@ -72,13 +95,13 @@ def wallet():
 @app.route("/about", methods=["GET"])
 def about():
   name = dbs.execute("SELECT val FROM dynamic WHERE var='site_name'")[0][0]
-  return render_template("about.html", website_name=name, dbs=dbs, str=str, library=True)
+  return render_template("about.html", website_name=name, dbs=dbs, str=str, library=True, lang=getLang())
 
 
 @app.route("/") # INDEX OF THE PROJECT. SHOW OWNED GAMES & STUFF
 def main():
   name = dbs.execute("SELECT val FROM dynamic WHERE var='site_name'")[0][0]
-  return render_template("index.html", website_name=name, str=str, library=True, dbs=dbs)
+  return render_template("index.html", website_name=name, str=str, library=True, dbs=dbs, lang=getLang())
 
 
 @app.route("/library", methods=["GET", "POST"])
@@ -98,7 +121,7 @@ def library():
         qgames.append(i)
 '''
   #return render_template("library.html", games=qgames, str=str, dbs=dbs, website_name=name)
-  return render_template("library.html", str=str, dbs=dbs, website_name=name)
+  return render_template("library.html", str=str, dbs=dbs, website_name=name, lang=getLang())
 
 
 @app.route("/browse", methods=["GET", "POST"]) # BROWSE METHOD. LOOK FOR NOT OWNED GAMES.
@@ -114,7 +137,7 @@ def browse():
     return games
 
   else:
-    return render_template("browse.html", website_name=name, str=str, library=True, dbs=dbs)
+    return render_template("browse.html", website_name=name, str=str, library=True, dbs=dbs, lang=getLang())
 
 
 @app.route("/login", methods=["GET", "POST"])
@@ -133,7 +156,7 @@ def login():
           puser = i
 
     if len(puser)==0:
-      return apology('Username or password is incorrect!', dbs=dbs) # apology mmot implemented yet
+      return apology('Username or password is incorrect!', dbs=dbs, lang=getLang()) # apology mmot implemented yet
 
 
     session["user_id"] = puser[0]
@@ -141,7 +164,7 @@ def login():
     return redirect("/")
 
   else:
-    return render_template("login.html", website_name=name, str=str, dbs=dbs)
+    return render_template("login.html", website_name=name, str=str, dbs=dbs, lang=getLang())
 
 @app.route("/register", methods=["GET", "POST"])
 def register():
@@ -155,12 +178,12 @@ def register():
 
     if passwd!=passwd_conf:
 
-      return apology("Passwords don't match", dbs=dbs)
+      return apology("Passwords don't match", dbs=dbs, lang=getLang())
     users = dbs.execute("select name FROM users")
 
     for i in users:
       if username==i[0]:
-        return apology('Username already taken', dbs=dbs)
+        return apology('Username already taken', dbs=dbs, lang=getLang())
 
 
 
@@ -174,7 +197,7 @@ def register():
 
     return redirect("/")
   else:
-    return render_template("register.html", website_name=name, str=str,dbs=dbs)
+    return render_template("register.html", website_name=name, str=str,dbs=dbs, lang=getLang())
 
 @app.route("/logout")
 def logout():
@@ -193,7 +216,7 @@ def gameview():
 
   print(id)
 
-  return render_template("gameview.html", game=game, dbs=dbs, website_name=name, str=str)
+  return render_template("gameview.html", game=game, dbs=dbs, website_name=name, str=str, lang=getLang())
 
 @app.route('/cart')
 @login_required
