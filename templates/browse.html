@@ -39,9 +39,9 @@
 {% block title %} {{website_name}} {% endblock %}
 
 {% block embed %}
-<h1> Browse </h1>
-<div class="center textblock">
-<div class="center browse-table">
+
+<div class="center textblock"> 
+<div class="center browse-table"> <h1> Browse </h1>
 {% for i in dbs.execute("SELECT * FROM games") %}
 <div class="div_game">
     <button onclick="getGame({{i[0]}})" oncl id="browse-game-button" class="browse-game-button">
