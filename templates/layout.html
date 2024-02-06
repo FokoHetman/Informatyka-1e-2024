@@ -536,20 +536,20 @@
   
   {% if not session["user_id"] %}
     addPanelElement("/", "{{website_name}}", "panel2", "logo", true);
-    addPanelElement("about", "About", "panel2", "about");
-    addPanelElement("browse", "Browse", "panel2", "browse");
-    addPanelElement("cart", "Cart", "panel2", "cart");
-    addPanelElement("library", "Library", "panel2", "library");
+    addPanelElement("about", "O projekcie", "panel2", "about");
+    addPanelElement("browse", "Przeglądaj", "panel2", "browse");
+    addPanelElement("cart", "Koszyk", "panel2", "cart");
+    addPanelElement("library", "Biblioteka", "panel2", "library");
   
   
     addPanelElement("login", "Login", "panel2", "loginpart");
-    addPanelElement("register", "Register", "panel2", "loginpart");
+    addPanelElement("register", "Rejestracja", "panel2", "loginpart");
   {% else %}
     addPanelElement("/", "{{website_name}}", "panel", "logo", true);
-    addPanelElement("about", "About", "panel", "about");
-    addPanelElement("browse", "Browse", "panel", "browse");
-    addPanelElement("cart", "Cart", "panel", "cart");
-    addPanelElement("library", "Library", "panel", "library");
+    addPanelElement("about", "O projekcie", "panel", "about");
+    addPanelElement("browse", "Przeglądaj", "panel", "browse");
+    addPanelElement("cart", "Koszyk", "panel", "cart");
+    addPanelElement("library", "Biblioteka", "panel", "library");
   
   
     addPanelElement("profile", "profile", "panel", "profile_img", true);
@@ -574,10 +574,10 @@
   //}
   
   swapImg(document.getElementById("a{{website_name}}"), "{{url_for('static', filename='images/logo.svg')}}");
-//  swapImgNR(document.getElementById("About"), "{{url_for('static', filename='images/about.svg')}}");
-//  swapImgNR(document.getElementById("Browse"), "{{url_for('static', filename='images/browse.svg')}}");
-//  swapImgNR(document.getElementById("Cart"), "{{url_for('static', filename='images/cart.svg')}}");
-//  swapImgNR(document.getElementById("Library"), "{{url_for('static', filename='images/library.svg')}}");
+//  swapImgNR(document.getElementById("O projekcie"), "{{url_for('static', filename='images/about.svg')}}");
+//  swapImgNR(document.getElementById("Przeglądaj"), "{{url_for('static', filename='images/browse.svg')}}");
+//  swapImgNR(document.getElementById("Koszyk"), "{{url_for('static', filename='images/cart.svg')}}");
+//  swapImgNR(document.getElementById("Biblioteka"), "{{url_for('static', filename='images/library.svg')}}");
     
 
   {% if session["user_id"] %}
