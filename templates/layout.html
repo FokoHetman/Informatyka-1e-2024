@@ -1,4 +1,3 @@
-
 <style>
   @media (min-width:320px)  { 
     /* smartphones, portrait iPhone, portrait 480x320 phones (Android) */
@@ -496,7 +495,7 @@
     </div>
 
      {%if session["user_id"]%}
-     <div class="money"><p1> <button class="btn" style="width: 100%;" onclick="">
+     <div class="money"><p1> <button class="btn" onclick="wallet()" style="width: 100%;" onclick="">
       {{dbs.execute("SELECT balance FROM users WHERE id="+str(session['user_id']))[0][0]}}PLN</button> </p1></div>
 {%endif%}
 
@@ -508,6 +507,10 @@
     $.post( "/changetheme", {
       javascript_data: id
     });
+  }
+
+  function wallet() {
+    location.replace("wallet");
   }
   function refresh() {
     location.reload();
@@ -614,5 +617,3 @@
   </script>
   </body>
   </html>
-  
-  
