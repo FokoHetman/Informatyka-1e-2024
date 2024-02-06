@@ -39,9 +39,8 @@
 {% block title %} {{website_name}} {% endblock %}
 
 {% block embed %}
-<h1>Biblioteka</h1>
 <div class="center textblock">
-<div class="center browse-table">
+<div class="center browse-table"> <h1>Biblioteka</h1>
 {% for i in dbs.execute("SELECT * FROM games") %}
 {% if str(i[0]) in dbs.execute("SELECT GAMES FROM users WHERE id="+str(session['user_id']))[0][0] %}
           <div class="div_game">
