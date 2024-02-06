@@ -526,20 +526,20 @@
   
   {% if not session["user_id"] %}
     addPanelElement("/", "{{website_name}}", "panel2", "logo", true);
-    addPanelElement("about", "About", "panel2", "about");
-    addPanelElement("browse", "Browse", "panel2", "browse");
-    addPanelElement("cart", "Cart", "panel2", "cart");
-    addPanelElement("library", "Library", "panel2", "library");
+    addPanelElement("about", "{{lang['about.title']}}", "panel2", "about");
+    addPanelElement("browse", "{{lang['browse.title']}}", "panel2", "browse");
+    addPanelElement("cart", "{{lang['cart.title']}}", "panel2", "cart");
+    addPanelElement("library", "{{lang['library.title']}}", "panel2", "library");
   
   
-    addPanelElement("login", "Login", "panel2", "loginpart");
-    addPanelElement("register", "Register", "panel2", "loginpart");
+    addPanelElement("login", "{{lang['login.title']}}", "panel2", "loginpart");
+    addPanelElement("register", "{{lang['register.title']}}", "panel2", "loginpart");
   {% else %}
     addPanelElement("/", "{{website_name}}", "panel", "logo", true);
-    addPanelElement("about", "About", "panel", "about");
-    addPanelElement("browse", "Browse", "panel", "browse");
-    addPanelElement("cart", "Cart", "panel", "cart");
-    addPanelElement("library", "Library", "panel", "library");
+    addPanelElement("about", "{{lang['about.title']}}", "panel", "about");
+    addPanelElement("browse", "{{lang['browse.title']}}", "panel", "browse");
+    addPanelElement("cart", "{{lang['cart.title']}}", "panel", "cart");
+    addPanelElement("library", "{{lang['library.title']}}", "panel", "library");
   
   
     addPanelElement("profile", "profile", "panel", "profile_img", true);

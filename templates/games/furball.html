@@ -8,6 +8,7 @@
 
 {% block embed %}
 <div class="textblock center">
+! NO TRANSLATION SUPPORT !
 Hello, {{dbs.execute("SELECT name FROM users WHERE id="+str(session['user_id']))[0][0]}}!<br>
 This is my (Foko's) private project, <a href="https://github.com/FokoHetman/Furballs">Furballs</a>.<br>
 It's a simple compression mechanism written in rust, that takes a folder/directory, fetches list of directories<br>

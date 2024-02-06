@@ -22,7 +22,12 @@ for i in langs:
 
 
 def getLang():
-  if session["user_id"]:
+  translate = {}
+
+  for i in langs:
+    with open("static/lang/"+i+".json", "r+") as f:
+      translate[i] = json.load(f)
+  if "user_id" in session:
     return translate[dbs.execute("SELECT lang FROM users WHERE id="+str(session["user_id"]))[0][0]]
   else:
     return translate["en_US"]
@@ -47,7 +52,7 @@ Session(app)
 '''YES'''
 @app.route('/favicon.ico')
 def favicon():
-    return send_from_directory('static/', 'favicon.ico', mimetype='image/vnd.microsoft.icon')
+    return send_from_directory('static/', 'favicon.ico', mimetype='image/vnd.microsoft.icon') # WINDOWS EVERYWWHERE RAAAAAAAAAAAAAAAAAAAAA
 
 
 
@@ -55,14 +60,26 @@ def favicon():
 
 
 '''GAME HANDLER'''
+
+@app.route("/chlang")
+@login_required
+def chlang():
+  lang = request.args["lang"]
+  dbs.execute("UPDATE users SET lang='"+lang+"' WHERE id="+str(session['user_id']))
+
+  return redirect("/profile")
+
+
+
 @app.route("/play")
+@login_required
 def play():
   id = request.args["id"]
   name = dbs.execute("SELECT val FROM dynamic WHERE var='site_name'")[0][0]
   if id:
     gamedata = dbs.execute("SELECT * FROM gamedata WHERE id="+str(id))[0]
 
-    return render_template("games/"+gamedata[1], dbs=dbs, str=str, website_name=name, library=False, game=dbs.execute("SELECT * FROM games WHERE id="+str(id))[0], lang=getLang())
+    return render_template("games/"+gamedata[1], dbs=dbs, str=str, website_name=name, library=False, game=dbs.execute("SELECT * FROM games WHERE id="+str(id))[0], lang=getLang(), name=name)
   return apology("id not found..")
 
 
@@ -81,9 +98,9 @@ def wallet():
     old_amount = dbs.execute("SELECT balance FROM users WHERE id="+str(session["user_id"]))[0][0]
     dbs.execute("UPDATE users SET balance="+str(int(old_amount)+int(new_amount))+" WHERE id="+str(session["user_id"]))
 
-    return render_template("transsuccess.html", dbs=dbs, str=str, library=True, website_name=name, item=str(new_amount)+"$", lang=getLang())
+    return render_template("transsuccess.html", dbs=dbs, str=str, library=True, website_name=name, item=str(new_amount)+"$", lang=getLang(), name=name)
   else:
-    return render_template("wallet.html", dbs=dbs, str=str, library=True, website_name=name, lang=getLang())
+    return render_template("wallet.html", dbs=dbs, str=str, library=True, website_name=name, lang=getLang(), name=name)
 
 
 
@@ -95,13 +112,13 @@ def wallet():
 @app.route("/about", methods=["GET"])
 def about():
   name = dbs.execute("SELECT val FROM dynamic WHERE var='site_name'")[0][0]
-  return render_template("about.html", website_name=name, dbs=dbs, str=str, library=True, lang=getLang())
+  return render_template("about.html", website_name=name, dbs=dbs, str=str, library=True, lang=getLang(), name=name)
 
 
 @app.route("/") # INDEX OF THE PROJECT. SHOW OWNED GAMES & STUFF
 def main():
   name = dbs.execute("SELECT val FROM dynamic WHERE var='site_name'")[0][0]
-  return render_template("index.html", website_name=name, str=str, library=True, dbs=dbs, lang=getLang())
+  return render_template("index.html", website_name=name, str=str, library=True, dbs=dbs, lang=getLang(), name=name)
 
 
 @app.route("/library", methods=["GET", "POST"])
@@ -121,7 +138,7 @@ def library():
         qgames.append(i)
 '''
   #return render_template("library.html", games=qgames, str=str, dbs=dbs, website_name=name)
-  return render_template("library.html", str=str, dbs=dbs, website_name=name, lang=getLang())
+  return render_template("library.html", str=str, dbs=dbs, website_name=name, lang=getLang(), name=name)
 
 
 @app.route("/browse", methods=["GET", "POST"]) # BROWSE METHOD. LOOK FOR NOT OWNED GAMES.
@@ -137,7 +154,7 @@ def browse():
     return games
 
   else:
-    return render_template("browse.html", website_name=name, str=str, library=True, dbs=dbs, lang=getLang())
+    return render_template("browse.html", website_name=name, str=str, library=True, dbs=dbs, lang=getLang(), name=name)
 
 
 @app.route("/login", methods=["GET", "POST"])
@@ -156,7 +173,7 @@ def login():
           puser = i
 
     if len(puser)==0:
-      return apology('Username or password is incorrect!', dbs=dbs, lang=getLang()) # apology mmot implemented yet
+      return apology(getLang()['error.inclogin'], dbs=dbs, lang=getLang(), name=name) # apology mmot implemented yet
 
 
     session["user_id"] = puser[0]
@@ -164,7 +181,7 @@ def login():
     return redirect("/")
 
   else:
-    return render_template("login.html", website_name=name, str=str, dbs=dbs, lang=getLang())
+    return render_template("login.html", website_name=name, str=str, dbs=dbs, lang=getLang(), name=name)
 
 @app.route("/register", methods=["GET", "POST"])
 def register():
@@ -178,12 +195,12 @@ def register():
 
     if passwd!=passwd_conf:
 
-      return apology("Passwords don't match", dbs=dbs, lang=getLang())
+      return apology(getLang()['error.passwdnomatch'], dbs=dbs, lang=getLang(), name=name)
     users = dbs.execute("select name FROM users")
 
     for i in users:
       if username==i[0]:
-        return apology('Username already taken', dbs=dbs, lang=getLang())
+        return apology(getLang()['error.taken'], dbs=dbs, lang=getLang(), name=name)
 
 
 
@@ -191,13 +208,13 @@ def register():
     starters = dbs.execute("SELECT val FROM dynamic WHERE var='start_budget'")[0][0]
 
 
-    dbs.execute(f"INSERT INTO users (id, name, password, balance, profile, theme, games, cart) VALUES ({len(users)+1}, '{username}', '{hashd}', {starters}, 'images/profiles/default.svg', 0, '', '')")
+    dbs.execute(f"INSERT INTO users (id, name, password, balance, profile, theme, games, cart, lang) VALUES ({len(users)+1}, '{username}', '{hashd}', {starters}, 'images/profiles/default.svg', 0, '', '', 'en_US')")
     session["user_id"] = int(len(users)+1)
 
 
     return redirect("/")
   else:
-    return render_template("register.html", website_name=name, str=str,dbs=dbs, lang=getLang())
+    return render_template("register.html", website_name=name, str=str,dbs=dbs, lang=getLang(), name=name)
 
 @app.route("/logout")
 def logout():
@@ -216,7 +233,7 @@ def gameview():
 
   print(id)
 
-  return render_template("gameview.html", game=game, dbs=dbs, website_name=name, str=str, lang=getLang())
+  return render_template("gameview.html", game=game, dbs=dbs, website_name=name, str=str, lang=getLang(), name=name)
 
 @app.route('/cart')
 @login_required
@@ -226,7 +243,7 @@ def cart():
   for i in dbs.execute("SELECT * FROM games"):
     if str(i[0]) in dbs.execute("SELECT cart FROM users WHERE id=" + str(session['user_id']))[0][0]:
       game_sum+=i[-1]
-  return render_template("cart.html", dbs=dbs, website_name=name, str=str, game_sum=game_sum)
+  return render_template("cart.html", dbs=dbs, website_name=name, str=str, game_sum=game_sum, lang=getLang(), name=name)
 
 
 @app.route('/modcart')
@@ -238,7 +255,7 @@ def modcart():
   owned = dbs.execute("SELECT games FROM users WHERE id=" + str(session['user_id']))[0][0]
 
   if str(id) in owned:
-    return apology("You already own that game!", dbs=dbs)
+    return apology(getLang()['error.owned'], dbs=dbs, lang=getLang())
 
   ncart = ""
   if dbs.execute("SELECT cart FROM users WHERE id=" + str(session["user_id"]))[0][0]:
@@ -270,16 +287,18 @@ def modcartdel():
 @app.route("/buycart")
 @login_required
 def buyall():
+  name = dbs.execute("SELECT val FROM dynamic WHERE var='site_name'")[0][0]
+
   game_sum=0
   cart = dbs.execute("SELECT cart FROM users WHERE id=" + str(session['user_id']))[0][0]
   owned = dbs.execute("SELECT games FROM users WHERE id=" + str(session['user_id']))[0][0]
   print(owned)
-  
+
   for i in dbs.execute("SELECT * FROM games"):
     if str(i[0]) in cart and str(i[0]) not in owned:
       game_sum+=i[-1]
   if game_sum>dbs.execute("SELECT balance FROM users WHERE id=" + str(session['user_id']))[0][0]:
-    return apology("You don't have enough cash!", dbs=dbs)
+    return apology(getLang()['error.lackcash'], dbs=dbs, name=name, lang=getLang())
 
   ngames = ""
   if owned:
@@ -289,22 +308,26 @@ def buyall():
       ngames+=str(i[0])
   nbal = dbs.execute("SELECT balance FROM users WHERE id="+str(session['user_id']))[0][0]-game_sum
   dbs.execute(f"UPDATE users SET games='{ngames}', cart='', balance={nbal} WHERE id="+str(session['user_id']))
-  return render_template("transsuccess.html", dbs=dbs, str=str, item="gry z koszyka")
+  return render_template("transsuccess.html", dbs=dbs, str=str, item="gry z koszyka", lang=getLang(), name=name)
 
 
 
 @app.route("/buy")
 def buy():
   id = request.args["id"]
+  name = dbs.execute("SELECT val FROM dynamic WHERE var='site_name'")[0][0]
+
+  if str(id) in dbs.execute("SELECT games FROM users WHERE id=" + str(session['user_id']))[0][0]:
+    return apology(getLang()['error.owned'], dbs=dbs, name=name, lang=getLang())
 
   if dbs.execute("SELECT price FROM games WHERE id="+str(id))[0][0]>dbs.execute("SELECT balance FROM users WHERE id=" + str(session['user_id']))[0][0]:
-    return apology("You don't have enough cash!", dbs=dbs)
+    return apology(getLang()['error.lackcash'], dbs=dbs, name=name, lang=getLang())
   new_bal = dbs.execute("SELECT balance FROM users WHERE id=" + str(session['user_id']))[0][0] - dbs.execute("SELECT price FROM games WHERE id="+str(id))[0][0]
 
   ngames = dbs.execute("SELECT games FROM users WHERE id="+str(session['user_id']))[0][0] + str(id)
 
   dbs.execute(f"UPDATE users SET balance={new_bal}, games='{ngames}' WHERE id="+str(session['user_id']))
-  return render_template("transsuccess.html", dbs=dbs, str=str, item=dbs.execute("SELECT name FROM games WHERE id="+str(id))[0][0])
+  return render_template("transsuccess.html", dbs=dbs, str=str, item=dbs.execute("SELECT name FROM games WHERE id="+str(id))[0][0], lang=getLang(), name=name)
 
 '''USER CUSTOMISATION'''
 
@@ -329,9 +352,9 @@ def profile():
 
     if new_passwd:
       if not check_password_hash(cur_passwd, old_passwd):
-        return apology('incorrect password', dbs=dbs)
+        return apology(getLang()['error.incpasswd'], dbs=dbs, name=name, lang=getLang())
       if new_passwd != new_passwd_conf:
-         return apology('passwords dont match', dbs=dbs)
+         return apology(getLang()['error.passwwdnomatch'], dbs=dbs, name=name, lang=getLang())
       dbs.execute(f"UPDATE users SET password='{generate_password_hash(new_passwd)}' WHERE id={session['user_id']}")
 
 
@@ -351,7 +374,7 @@ def profile():
 
     return redirect("/")
   else:
-    return render_template("profile.html", website_name=name, str=str,dbs=dbs)
+    return render_template("profile.html", website_name=name, str=str,dbs=dbs, lang=getLang(), name=name)
 
 
 @app.route("/changetheme", methods=["POST"])
@@ -376,7 +399,7 @@ def gdb():
     q=request.form.get("query")
     return dbs.execute(q)
   else:
-    return render_template("query.html", website_name=name, str=str,dbs=dbs)
+    return render_template("query.html", website_name=name, str=str,dbs=dbs, lang=getLang(), name=name)
 
 
 app.run(port=2137, host='0.0.0.0')

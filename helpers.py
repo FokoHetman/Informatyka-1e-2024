@@ -6,7 +6,7 @@ from flask import redirect, render_template, session
 from functools import wraps
 
 
-def apology(message, dbs=None, code=400):
+def apology(message, dbs=None, code=400, lang="en_US", name="damn"):
     """Render message as an apology to user."""
 
     def escape(s):
@@ -28,7 +28,7 @@ def apology(message, dbs=None, code=400):
             s = s.replace(old, new)
         return s
 
-    return render_template("apology.html", dbs=dbs, str=str, top=code, bottom=escape(message)), code
+    return render_template("apology.html", dbs=dbs, str=str, website_name=name, lang=lang, top=code, bottom=escape(message)), code
 
 
 def login_required(f):

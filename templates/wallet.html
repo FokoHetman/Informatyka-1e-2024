@@ -12,11 +12,11 @@
 {% endif %}
 
 <form action="/wallet" method="POST">
-<h2>Szukasz sposobu na doładowanie swego konta?</h2><br>
-<h3>Wybierz ilość pięniędzy do dodania!</h3><br>
+<h2>{{lang['wallet.q1']}} </h2><br>
+<h3> {{lang['wallet.q2']}} </h3><br>
 
 <input autocomplete="off" class="form-control" min="0" step="10" name="money" id="money" value=100 placeholder=100 type="number">
-<button name="submit" class="btn" type=submit> Dodaj! </button>
+<button name="submit" class="btn" type=submit> {{lang['wallet.submit']}} </button>
 </form>
 
 {% endblock %}
