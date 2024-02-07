@@ -108,14 +108,15 @@
     border-radius: 10px;
     background: radial-gradient(rgb(3, 212, 3),green);
     width: 40%;
-    margin-top: 3.5%;
-    transition: 1s;
+    margin-top: 3.5%; 
   }
   
   .btn:hover {
     transform: scale(1.15);
   }
-
+  .btro {
+	transition: 1s;
+}
   .btu {
     border: 2px solid black;
     border-radius: 10px;
@@ -418,7 +419,7 @@
 
 .wallet
 {
-  position: fixed;
+  position: relative;
   border-radius: 50%;
   width: 32px;
   height: 32px;
@@ -611,18 +612,21 @@
     document.getElementById("my_button1").style.visibility = "hidden";
     document.getElementById("my_button2").style.visibility = "hidden";
     document.getElementById("my_button3").style.visibility = "hidden";
+    document.getElementById("lguee").style.visibility = "hidden";
   }
   function myFunctionq() {
     document.getElementById("s_username").style.visibility = "visible";
     document.getElementById("my_button2").style.visibility = "hidden";
     document.getElementById("my_button1").style.visibility = "hidden";
     document.getElementById("my_button3").style.visibility = "hidden";
+    document.getElementById("lguee").style.visibility = "hidden";
   }
   function myFunctiond() {
     document.getElementById("s_image").style.visibility = "visible";
     document.getElementById("my_button2").style.visibility = "hidden";
     document.getElementById("my_button1").style.visibility = "hidden";
     document.getElementById("my_button3").style.visibility = "hidden";
+    document.getElementById("lguee").style.visibility = "hidden";
   }
   function function_return() {
     document.getElementById("s_image").style.visibility = "hidden";
@@ -631,7 +635,9 @@
     document.getElementById("my_button2").style.visibility = "visible";
     document.getElementById("my_button1").style.visibility = "visible";
     document.getElementById("my_button3").style.visibility = "visible";
+    document.getElementById("lguee").style.visibility = "visible";
   }
+  
   </script>
   </body>
   </html>
