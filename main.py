@@ -12,7 +12,7 @@ from flask_session import Session
 
 
 '''LANGAUGES'''
-langs = ["en_US"] #, "pl_PL"]
+langs = ["en_US", "pl_PL"]
 translate = {}
 
 for i in langs:

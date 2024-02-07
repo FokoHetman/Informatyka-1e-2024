@@ -1,4 +1,6 @@
 {
+  "login.title": "Login",
+  "register.title": "Register",
   "cart.title": "Cart",
   "browse.title": "Browse",
   "library.title": "Library",
@@ -41,6 +43,11 @@
   "common.success": "Success",
   "common.change": "Change",
   "common.logout": "Log out",
+  "common.confirm": "Confirm",
+  "common.old": "Old",
+  "common.return": "Return",
+  "common.avatar": "Avatar",
+  "common.language": "Language",
 
   "error.lackcash": "You don't have enough cash!",
   "error.incpasswd": "Incorrect Password!",

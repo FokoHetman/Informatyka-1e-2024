@@ -1,0 +1,59 @@
+{
+  "login.title": "Zaloguj się",
+  "register.title": "Zarejestruj się",
+  "cart.title": "Koszyk",
+  "browse.title": "Przeglądaj",
+  "library.title": "Biblioteka",
+  "about.title": "O mnie",
+  "about.wallotext": "To projekt, który ma wyglądać i działać jak sklepy z grami, np. Steam czy epickie gry. Zacznijmy od autorów: Bartka, Patryka, Jakuba i Roberta. Projekt był pomysłem zaproponowanym przez foko znalezione przez zmieszanie pomysłów innych, rozszerzone i „ulepszone” przez innych członków grupy.",
+  "about.welcome": "Witamy w ",
+  "about.hello": "Witam",
+  "about.bartek": "Bartek: twórca ikon i nie tylko - frontendu",
+  "about.jakub": "Jakub: główny twórca frontendu - css i niektóre części backendu",
+  "about.robert": "Robert: drugi programista frontendowy, części css,",
+  "about.patryk": "Patryk: Opiekun 'szkieletu' tej witryny. Główny programista backendu.",
+  "about.authors": "Autorzy: ",
+
+  "doom.desc": "Klasyczne demo Dooma, które pobrałem z najbardziej szkicowej możliwej strony.",
+  "polish.desc": "Symulator polskiego paznokcia",
+  "furball.desc": "Prosty sposób kompresji. Wykonany z rdzy.",
+  "fokpkgmgr.desc": "Prosty menedżer pakietów dla systemu operacyjnego GNU/Linux wykonany w języku Rust.",
+  "gta.desc": "Tani klon gta, nie zaimplementowany",
+  "watermelon.desc": "KOT jedzący arbuza przez 6 MINUT PROSTO. CHODZIMY!",
+  "watermelon.gamedesc": "Patrz, jak kot je kawałek arbuza przez 5 minut i 43 sekundy!",
+
+  "hoi5.desc": "Nowa wersja gry HOI4! Zagraj w DLC Civil War II za 19 zł więcej!",
+
+
+  "wallet.q1": "Szukasz sposobu na zdobycie gotówki?",
+  "wallet.q2": "Wybierz kwotę i spienięż ją!",
+  "wallet.submit": "Wpłata",
+
+  "profile.forgor": "Zapomniałem hasła",
+  "profile.problem": "To nie nasz problem, kolego!",
+
+  "transaction.items": "Pomyślnie dodano do Twojego konta: ",
+  "transaction.thanks": "Dziękujemy za skorzystanie z naszych usług!",
+
+
+  "common.username": "Nazwa Użytkownika",
+  "common.password": "Hasło",
+  "common.new": "Nowy",
+  "common.submit": "Wprowadź",
+  "common.noimpl": "Brak Implementacji",
+  "common.success": "Sukces",
+  "common.change": "Zmień",
+  "common.logout": "Wyloguj",
+  "common.confirm": "Potwierdź",
+  "common.old": "Stare",
+  "common.return": "Wróć",
+  "common.avatar": "Awatar",
+  "common.language": "Język",
+
+  "error.lackcash": "Nie masz wystarczająco gotówki!",
+  "error.incpasswd": "Nieprawidłowe hasło!",
+  "error.passwdnomatch": "Hasła się nie zgadzają!",
+  "error.inclogin": "Nazwa użytkownika lub nazwa niepoprawne!",
+  "error.taken": "Nazwa użytkownika zajęta!",
+  "error.owned": "Już posiadasz tą grę!"
+}
