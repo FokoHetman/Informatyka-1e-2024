@@ -39,7 +39,7 @@
   "common.submit": "Submit",
   "common.noimpl": "No Implementation",
   "common.success": "Success",
-
+  "common.change": "Change",
   "error.lackcash": "You don't have enough cash!",
   "error.incpasswd": "Incorrect Password!",
   "error.passwdnomatch": "Passwords don't match!",
