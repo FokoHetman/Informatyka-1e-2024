@@ -40,6 +40,8 @@
   "common.noimpl": "No Implementation",
   "common.success": "Success",
   "common.change": "Change",
+  "common.logout": "Log out",
+
   "error.lackcash": "You don't have enough cash!",
   "error.incpasswd": "Incorrect Password!",
   "error.passwdnomatch": "Passwords don't match!",
