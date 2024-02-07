@@ -183,6 +183,9 @@
     .lib_all {
       visibility: visible;
 }
+    .div_lib {
+      visibility:visible;
+    }
   }
     .themes_panel:hover {
     width: 20%;
@@ -309,6 +312,7 @@
   left: 10%;
 }
 .img_lib {
+    margin-bottom: 20%;
     height: 50%;
     width: 60%;
 }
@@ -446,7 +450,9 @@
     transform: scale(1.2);
     opacity: 1;
 }
-
+.div_lib {
+    visibility:hidden;    
+}
 </style>
 
 
@@ -463,10 +469,9 @@
   
     {% if session["user_id"] %}
          <div class="lay">
-          </div>
            <div id="panel" class="panel center">
             </div>
-          
+          </div>
     {% else %}
       <div class="lay">
         <div id="panel2" class="panel center">
@@ -478,10 +483,10 @@
       <h1> Library: </h1>
         {% for i in dbs.execute("SELECT * FROM games") %}
           {% if str(i[0]) in dbs.execute("SELECT games FROM users WHERE id="+str(session['user_id']))[0][0] %}
-          <div class="div_themes">
+          <div class="div_lib">
             <button onclick="" oncl id="theme-libpanel" class="theme-button">
-              {{i[1]}}
-              <img class="img_themes" src="{{url_for('static', filename=i[2])}}">
+              <div style="width: 1%;position:absolute;top:60%;margin-left:5%;">{{i[1]}}</div>
+              <img class="img_lib" src="{{url_for('static', filename=i[2])}}">
             </button>
           </div>
           {% endif %}
