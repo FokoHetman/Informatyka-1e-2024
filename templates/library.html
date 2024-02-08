@@ -30,6 +30,11 @@
 
 
     }
+
+.gameName {
+  font-family: daysOne;
+  color: rgba(20, 20, 20, 0.8);
+}
 </style>
 
 
@@ -47,7 +52,7 @@
 {% if str(i[0]) in dbs.execute("SELECT GAMES FROM users WHERE id="+str(session['user_id']))[0][0] %}
           <div class="div_game">
             <button onclick="getGame({{i[0]}})" id="browse-game-button" class="browse-game-button">
-                {{i[1]}}
+                <div class="gameName">{{i[1]}}</div>
                 <img class="img_themes" src="{{url_for('static', filename=i[2])}}">
             </button>
           </div>

@@ -462,6 +462,11 @@
 .div_lib {
     visibility:hidden;    
 }
+
+.gameName {
+  font-family: daysOne;
+  color: rgba(20, 20, 20, 0.8);
+}
 </style>
 
 
@@ -493,8 +498,8 @@
         {% for i in dbs.execute("SELECT * FROM games") %}
           {% if str(i[0]) in dbs.execute("SELECT games FROM users WHERE id="+str(session['user_id']))[0][0] %}
           <div class="div_lib">
-            <button onclick="" oncl id="theme-libpanel" class="theme-button">
-              <div style="width: 1%;position:absolute;top:60%;margin-left:5%;">{{i[1]}}</div>
+            <button onclick="goGame({{i[0]}})" oncl id="theme-libpanel" class="theme-button">
+              <div class="gameName" style="width: 1%;position:absolute;top:60%;margin-left:5%;">{{i[1]}}</div>
               <img class="img_lib" src="{{url_for('static', filename=i[2])}}">
             </button>
           </div>
