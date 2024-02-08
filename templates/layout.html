@@ -265,6 +265,9 @@
   position: relative;
   z-index: 10;
 }
+.lay3 {
+  z-index:1;
+}	
 .theme-button {
   background: transparent;
   border: None;
@@ -485,7 +488,7 @@
       </div>
     {% endif %}
     {% if session["user_id"] and library %}
-    <div id="lib_panel" class="lib_panel">
+    <div id="lib_panel" class="lib_panel lay3">
       <h1> Library: </h1>
         {% for i in dbs.execute("SELECT * FROM games") %}
           {% if str(i[0]) in dbs.execute("SELECT games FROM users WHERE id="+str(session['user_id']))[0][0] %}
@@ -498,7 +501,7 @@
           {% endif %}
         {% endfor %}
     </div>
-    <div id="themes_panel" class="themes_panel">
+    <div id="themes_panel" class="themes_panel lay3">
         <h1 style="text-align: center;"> Themes: </h1>
 
         <div class="themes_pos">
