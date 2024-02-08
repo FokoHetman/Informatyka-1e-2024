@@ -260,6 +260,11 @@
   position: relative;
   z-index: 1;
 }
+
+.lay {
+  position: relative;
+  z-index: 10;
+}
 .theme-button {
   background: transparent;
   border: None;
@@ -513,7 +518,7 @@
     </div>
 
      {%if session["user_id"]%}
-     <div class="money"><p1> <button class="btn" onclick="wallet()" style="width: 100%;" onclick="">
+     <div class="money lay2"><p1> <button class="btn" onclick="wallet()" style="width: 100%;" onclick="">
       {{dbs.execute("SELECT balance FROM users WHERE id="+str(session['user_id']))[0][0]}}PLN</button> </p1></div>
 {%endif%}
 
