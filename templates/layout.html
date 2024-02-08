@@ -109,8 +109,19 @@
     background: radial-gradient(rgb(3, 212, 3),green);
     width: 40%;
     margin-top: 3.5%; 
+    transition: 1s;
   }
-  
+  .btnwallet {
+    border: 2px solid black;
+    background: radial-gradient(rgb(3, 212, 3),green);
+    width: 40%;
+    margin-top: 3.5%; 
+   transition: 1s;
+  }
+  .btnwallet:hover {
+    transform: scale(1.1);
+  }
+
   .btn:hover {
     transform: scale(1.15);
   }
@@ -213,6 +224,7 @@
     border-radius: 55px;
     padding: 25px;
     width: 900px;
+    height: 100%;
     font-size: 120%;
     text-align: left;
 }
@@ -527,7 +539,7 @@
 
      {%if session["user_id"]%}
     <div class="lay2">
-     <div class="money"><p1> <button class="btn" onclick="wallet()" style="width: 100%;" onclick="">
+     <div class="money"><p1> <button class="btnwallet" onclick="wallet()" style="width: 100%;">
       {{dbs.execute("SELECT balance FROM users WHERE id="+str(session['user_id']))[0][0]}}PLN</button> </p1></div>
 </div>
 {%endif%}
@@ -540,6 +552,10 @@
     $.post( "/changetheme", {
       javascript_data: id
     });
+  }
+
+  function goGame(id) {
+    location.replace("/gameview?id="+id);
   }
 
   function wallet() {
