@@ -34,6 +34,10 @@
       margin: 20px;
       padding: 5%;
     }
+    .gameName {
+  font-family: daysOne;
+  color: rgba(20, 20, 20, 0.8);
+}
 </style>
 
 
@@ -54,7 +58,7 @@
 
 <div class="div_game">
     <button onclick="getGame({{i[0]}})" oncl id="browse-game-button" class="browse-game-button">
-        {{i[1]}}
+        <div class="gameName">{{i[1]}}</div>
         <img class="img_themes" src="{{url_for('static', filename=i[2])}}">
     </button>
     <button onclick="modcart({{i[0]}}, 'del')">Remove from cart</button>
